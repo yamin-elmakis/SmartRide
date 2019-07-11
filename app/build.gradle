@@ -5,6 +5,9 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
+
+    flavorDimensions "default"
+
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.example.smartride"
@@ -14,10 +17,51 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    File debugKeystore = new File(new File(getRootDir(), "Keystore"), "debug.keystore")
+    signingConfigs {
+        debug_config {
+            storeFile debugKeystore
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+    }
+
+    productFlavors {
+        dev {
+
+        }
+    }
+
     buildTypes {
+
+        debug {
+            applicationIdSuffix '.dev'
+            signingConfig signingConfigs.debug_config
+
+            debuggable true
+            changeApkName()
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            debuggable false
+            changeApkName()
+        }
+    }
+}
+
+def changeApkName() {
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            def buildType = variant.getBuildType().getName()
+            def productFlavor = variant.productFlavors[0].name
+            def versionName = variant.versionName
+
+            outputFileName = "SmartRide_" + productFlavor + "_" + buildType + "_" + versionName + ".apk"
         }
     }
 }
