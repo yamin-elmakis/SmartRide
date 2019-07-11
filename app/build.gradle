@@ -5,6 +5,9 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
+
+    flavorDimensions "default"
+
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.example.smartride"
@@ -14,21 +17,89 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    File debugKeystore = new File(new File(getRootDir(), "Keystore"), "debug.keystore")
+    signingConfigs {
+        debug_config {
+            storeFile debugKeystore
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+    }
+
+    productFlavors {
+        dev {
+
+        }
+    }
+
     buildTypes {
+
+        debug {
+            applicationIdSuffix '.dev'
+            signingConfig signingConfigs.debug_config
+
+            debuggable true
+            changeApkName()
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            debuggable false
+            changeApkName()
         }
     }
 }
 
+def changeApkName() {
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            def buildType = variant.getBuildType().getName()
+            def productFlavor = variant.productFlavors[0].name
+            def versionName = variant.versionName
+
+            outputFileName = "SmartRide_" + productFlavor + "_" + buildType + "_" + versionName + ".apk"
+        }
+    }
+}
+
+ext {
+    aacVersion = "2.0.0"
+    glideVersion = "3.8.0"
+
+    rxJavaVersion = '2.1.4'
+    rxAndroidVersion = '2.1.0'
+    rxRelayVersion = '2.0.0'
+
+    nav_version_ktx = '2.1.0-alpha06'
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.core:core-ktx:1.0.2'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.google.android.gms:play-services-plus:17.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    // Glide
+    implementation "com.github.bumptech.glide:glide:${glideVersion}"
+
+    // RX Java
+    implementation "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}"
+
+    // ViewModel and LiveData
+    implementation "androidx.lifecycle:lifecycle-extensions:${aacVersion}"
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:${aacVersion}"
+
+    // Android Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version_ktx"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version_ktx"
 }
