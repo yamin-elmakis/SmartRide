@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'com.google.gms.google-services'
+
 android {
 
     flavorDimensions "default"
@@ -102,4 +104,7 @@ dependencies {
     // Android Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version_ktx"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version_ktx"
+
+    // Firebase
+    implementation 'com.google.firebase:firebase-core:17.0.1'
 }
