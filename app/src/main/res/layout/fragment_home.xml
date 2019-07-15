@@ -1,8 +1,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:tools="http://schemas.android.com/tools">
 
     <TextView
             android:id="@+id/text"
@@ -17,5 +18,33 @@
             android:clickable="true"
             android:focusable="true"
             android:text="HOME FRAGMENT"/>
+
+    <com.example.smartride.widgets.TimeCounterView
+            android:id="@+id/timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="30sp"
+            android:stateListAnimator="@animator/raise"
+            android:clickable="true"
+            android:focusable="true"
+            tools:text="00:00:30"/>
+
+    <com.example.smartride.widgets.FlipTextView
+            android:id="@+id/textFlipper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="30sp"
+            android:stateListAnimator="@animator/raise"
+            android:clickable="true"
+            android:focusable="true"
+            tools:text="00:00:30"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

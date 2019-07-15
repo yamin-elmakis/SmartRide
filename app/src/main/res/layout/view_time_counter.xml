@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:app="http://schemas.android.com/apk/res-auto"
+       xmlns:tools="http://schemas.android.com/tools"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineNumbers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="8dp"/>
+
+    <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineDots"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="7dp"/>
+
+    <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineSubText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="38dp"/>
+
+    <TextView
+            android:id="@+id/counterMin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/CounterText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/guidelineNumbers"
+            android:text="00"/>
+
+    <TextView
+            android:id="@+id/counterMinDots"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/CounterText"
+            app:layout_constraintStart_toEndOf="@+id/counterMin"
+            app:layout_constraintTop_toTopOf="@id/guidelineDots"
+            android:text=":"/>
+
+    <TextView
+            android:id="@+id/counterSec"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/counterMinDots"
+            app:layout_constraintTop_toTopOf="@id/guidelineNumbers"
+            style="@style/CounterText"
+            android:text="00"/>
+
+    <TextView
+            android:id="@+id/counterHrDots"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/CounterText"
+            app:layout_constraintEnd_toStartOf="@+id/counterMin"
+            app:layout_constraintTop_toTopOf="@id/guidelineDots"
+            android:text=":"/>
+
+    <TextView
+            android:id="@+id/counterHr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@+id/counterHrDots"
+            app:layout_constraintTop_toTopOf="@id/guidelineNumbers"
+            style="@style/CounterText"
+            android:text="00"/>
+
+    <TextView
+            android:id="@+id/counterHrText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/counterHr"
+            app:layout_constraintStart_toStartOf="@+id/counterHr"
+            app:layout_constraintTop_toBottomOf="@id/guidelineSubText"
+            style="@style/CounterSubText"
+            android:textAllCaps="true"
+            android:text="HR"/>
+
+    <TextView
+            android:id="@+id/counterMinText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/counterMin"
+            app:layout_constraintStart_toStartOf="@+id/counterMin"
+            app:layout_constraintTop_toBottomOf="@id/guidelineSubText"
+            style="@style/CounterSubText"
+            android:textAllCaps="true"
+            android:text="Min"/>
+
+    <TextView
+            android:id="@+id/counterSecText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/counterSec"
+            app:layout_constraintStart_toStartOf="@+id/counterSec"
+            app:layout_constraintTop_toBottomOf="@id/guidelineSubText"
+            style="@style/CounterSubText"
+            android:textAllCaps="true"
+            android:text="Sec"/>
+
+</merge>

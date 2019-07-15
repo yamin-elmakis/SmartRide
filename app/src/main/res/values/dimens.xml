@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="size_m">8dp</dimen>
+    <dimen name="size_s">4dp</dimen>
+    <dimen name="size_xs">2dp</dimen>
+
+    <dimen name="time_counter_text_size">26sp</dimen>
+    <dimen name="time_counter_sub_text_size">10sp</dimen>
+    <dimen name="time_counter_dots_size">24sp</dimen>
+
+</resources>

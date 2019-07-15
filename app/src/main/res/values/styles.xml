@@ -8,4 +8,14 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="CounterText">
+        <item name="android:textSize">@dimen/time_counter_text_size</item>
+        <item name="android:textColor">@color/red</item>
+    </style>
+
+    <style name="CounterSubText">
+        <item name="android:textSize">@dimen/time_counter_sub_text_size</item>
+        <item name="android:textColor">@color/red</item>
+    </style>
+
 </resources>
