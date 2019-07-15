@@ -66,6 +66,10 @@ def changeApkName() {
     }
 }
 
+repositories {
+    maven { url "https://jitpack.io" }
+}
+
 ext {
     aacVersion = "2.0.0"
     glideVersion = "3.8.0"
@@ -102,4 +106,6 @@ dependencies {
     // Android Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version_ktx"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version_ktx"
+
+    implementation 'com.github.yamin-elmakis:EasyLog:v1.5'
 }
