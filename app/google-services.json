@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1004663435853",
+    "firebase_url": "https://heresmartride.firebaseio.com",
+    "project_id": "heresmartride",
+    "storage_bucket": "heresmartride.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1004663435853:android:4707efe2df8279ac",
+        "android_client_info": {
+          "package_name": "com.example.smartride.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1004663435853-b03no5bv90ht6ob2nedeim9bjqoeb1a4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.smartride.dev",
+            "certificate_hash": "d6dd2d2f2851be312e2c2dde9d0f096250ea8828"
+          }
+        },
+        {
+          "client_id": "1004663435853-3fv8nbfdppa9v337h0s4bckpmg9ebgjd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCesUboYUCHtA3nvdqQsvruBgS0BSF-oV4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1004663435853-3fv8nbfdppa9v337h0s4bckpmg9ebgjd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

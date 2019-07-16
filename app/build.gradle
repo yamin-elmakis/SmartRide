@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'com.google.gms.google-services'
+
 android {
 
     flavorDimensions "default"
@@ -112,4 +114,8 @@ dependencies {
 
     // Logger
     implementation 'com.github.yamin-elmakis:EasyLog:v1.5'
+
+    // Firebase
+    implementation 'com.google.firebase:firebase-core:17.0.1'
+    implementation 'com.google.firebase:firebase-auth:18.1.0'
 }

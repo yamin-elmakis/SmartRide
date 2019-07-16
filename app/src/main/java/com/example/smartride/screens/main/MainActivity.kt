@@ -1,7 +1,8 @@
-package com.example.smartride
+package com.example.smartride.screens.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.smartride.R
 
 class MainActivity : AppCompatActivity() {
 
