@@ -8,6 +8,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.smartride.R
 import com.example.smartride.screens.main.MainActivity
+import com.example.smartride.utils.FirebaseUtils
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
 import kotlinx.android.synthetic.main.activity_login.*
@@ -128,6 +129,9 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun displayUser(user: FirebaseUser?) {
+
+        FirebaseUtils.updateUserFCMToken()
+
         textUser.visibility = View.VISIBLE
         groupMain.visibility = View.GONE
 
