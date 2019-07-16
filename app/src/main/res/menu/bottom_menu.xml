@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+            android:id="@+id/ride"
+            android:title="Ride"/>
+    <item
+            android:id="@+id/list"
+            android:title="Leader board"/>
+    <item
+            android:id="@+id/wallet"
+            android:title="Wallet"/>
+</menu>
