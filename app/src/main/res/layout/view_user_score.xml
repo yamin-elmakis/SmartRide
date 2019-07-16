@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <ImageView
+            android:id="@+id/userScoreIcon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/ic_coin"/>
+
+    <TextView
+            android:id="@+id/userScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/userScoreIcon"
+            android:textSize="16sp"
+            android:paddingEnd="4dp"
+            android:paddingStart="4dp"
+            tools:text="0"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+            android:id="@+id/userScorePlus"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:layout_constraintStart_toEndOf="@id/userScore"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/ic_plus"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
