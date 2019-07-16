@@ -93,7 +93,7 @@ class LoginActivity : AppCompatActivity() {
     private fun displayUser(user: FirebaseUser?) {
         textUser.text = "User Signed In!!!" +
                 "\nName: ${user?.displayName}" +
-                "\nPhoneNumber: ${user?.phoneNumber}"
+                "\nPhone Number: ${user?.phoneNumber}"
 
         Handler().postDelayed({
             startActivity(Intent(this, MainActivity::class.java))
