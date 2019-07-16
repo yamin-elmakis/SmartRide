@@ -27,7 +27,7 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_begin="38dp"/>
 
-    <TextView
+    <com.example.smartride.widgets.FlipTextView
             android:id="@+id/counterMin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/guidelineNumbers"
-            android:text="00"/>
+            tools:text="00"/>
 
     <TextView
             android:id="@+id/counterMinDots"
@@ -46,14 +46,14 @@
             app:layout_constraintTop_toTopOf="@id/guidelineDots"
             android:text=":"/>
 
-    <TextView
+    <com.example.smartride.widgets.FlipTextView
             android:id="@+id/counterSec"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@+id/counterMinDots"
             app:layout_constraintTop_toTopOf="@id/guidelineNumbers"
             style="@style/CounterText"
-            android:text="00"/>
+            tools:text="00"/>
 
     <TextView
             android:id="@+id/counterHrDots"
@@ -64,14 +64,14 @@
             app:layout_constraintTop_toTopOf="@id/guidelineDots"
             android:text=":"/>
 
-    <TextView
+    <com.example.smartride.widgets.FlipTextView
             android:id="@+id/counterHr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toStartOf="@+id/counterHrDots"
             app:layout_constraintTop_toTopOf="@id/guidelineNumbers"
             style="@style/CounterText"
-            android:text="00"/>
+            tools:text="00"/>
 
     <TextView
             android:id="@+id/counterHrText"

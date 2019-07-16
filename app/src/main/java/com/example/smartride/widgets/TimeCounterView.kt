@@ -40,14 +40,15 @@ class TimeCounterView @JvmOverloads constructor(
                 post {
                     val newTimeData = millisUntilFinished.toTimerData()
                     newTimeData.changed(timeData, { hour }, action = {
-                        counterHr.text = it.toString()
+                        counterHr.animateSetText("%02d".format(it))
                     })
                     newTimeData.changed(timeData, { minute }, action = {
-                        counterMin.text = it.toString()
+                        counterMin.animateSetText("%02d".format(it))
                     })
                     newTimeData.changed(timeData, { second }, action = {
-                        counterSec.text = it.toString()
+                        counterSec.animateSetText("%02d".format(it))
                     })
+                    timeData = newTimeData
                 }
             }
 
@@ -62,6 +63,7 @@ class TimeCounterView @JvmOverloads constructor(
         counter?.let {
             it.cancel()
             counter = null
+            timeData = null
         }
     }
 
