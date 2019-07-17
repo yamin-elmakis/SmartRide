@@ -10,7 +10,9 @@ import com.example.smartride.R
 import com.example.smartride.base.IBottomNavigation
 import kotlinx.android.synthetic.main.navigation_bottom.view.*
 import android.view.animation.AnimationUtils
-
+import com.airbnb.lottie.LottieDrawable
+import kotlinx.android.synthetic.main.fragment_home.*
+import lib.yamin.easylog.EasyLog
 
 class BottomNavigation : LinearLayout {
 
@@ -25,6 +27,7 @@ class BottomNavigation : LinearLayout {
 
         orientation = HORIZONTAL
         gravity = Gravity.CENTER_HORIZONTAL
+        clipChildren = false
         setBackgroundColor(Color.parseColor("#383c45"))
 
         inflate(context, R.layout.navigation_bottom, this)
@@ -79,6 +82,17 @@ class BottomNavigation : LinearLayout {
     }
 
     fun setRideLiveState(isLive: Boolean) {
+        EasyLog.e("isLive: $isLive")
+        if (isLive) {
+            tabLive.imageAssetsFolder = "assets/";
+            tabLive.setAnimation("live_ride.json")
+            tabLive.repeatCount = LottieDrawable.INFINITE
+            tabLive.playAnimation()
+        }
+//        if (isLive) {
+//            rideIconBg.animate()
+//                .
+//        }
 //        val liveRideAnimation = AnimationUtils.loadAnimation(context, R.anim.live_ride_tab)
 //        liveRideAnimation.repeatCount = Animation.INFINITE
 //        liveRideAnimation.repeatMode = Animation.RESTART
