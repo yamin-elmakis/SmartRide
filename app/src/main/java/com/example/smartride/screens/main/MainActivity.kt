@@ -1,12 +1,14 @@
 package com.example.smartride.screens.main
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.smartride.R
 import com.example.smartride.base.IToolBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), IToolBar {
 
@@ -44,7 +46,11 @@ class MainActivity : AppCompatActivity(), IToolBar {
     }
 
     override fun toggleToolBar(show: Boolean) {
-        
+        if (show) {
+            main_toolbar.visibility = View.VISIBLE
+        } else {
+            main_toolbar.visibility = View.GONE
+        }
     }
 
 }

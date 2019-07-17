@@ -2,6 +2,8 @@
     <string name="app_name">SmartRide</string>
 
     <string name="hi_user">Hey %s</string>
+    <string name="hi_user_toolbar">Hey %s,</string>
     <string name="hint_phone">Enter your phone number</string>
     <string name="phone_submit">Login</string>
+    <string name="enjoy">Enjoy your ride</string>
 </resources>
