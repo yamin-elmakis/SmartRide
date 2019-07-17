@@ -58,4 +58,8 @@ class MainActivity : AppCompatActivity(), IToolBar {
         mainToolbar.setToolBarMode(toolBarMode)
     }
 
+    override fun onToolBarBackPress() {
+        onBackPressed()
+    }
+
 }
