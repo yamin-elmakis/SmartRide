@@ -9,7 +9,7 @@ import com.example.smartride.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_home.*
 import lib.yamin.easylog.EasyLog
 
-class HomeFragment : BaseFragment() {
+class PendingRideFragment : BaseFragment() {
 
     override fun displayToolBar() = false
 
