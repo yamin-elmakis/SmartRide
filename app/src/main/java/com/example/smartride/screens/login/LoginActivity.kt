@@ -4,10 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import android.widget.Toast
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.smartride.R
 import com.example.smartride.screens.main.MainActivity
+import com.example.smartride.utils.FirebaseUtils
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
 import kotlinx.android.synthetic.main.activity_login.*
@@ -46,6 +47,19 @@ class LoginActivity : AppCompatActivity() {
         }
 
         buttonSubmitPhone.setOnClickListener {
+
+            if (editUsername.text.isEmpty()) {
+                editUsername.error = "One has to have a name..."
+                return@setOnClickListener
+            }
+
+            if (editPhoneNumber.text.isEmpty()) {
+                editPhoneNumber.error = "We wanna stay in touch :["
+                return@setOnClickListener
+            }
+
+            clearErrors()
+
             PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 editPhoneNumber.text.toString(),
                 60, TimeUnit.SECONDS, this, object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
@@ -57,7 +71,7 @@ class LoginActivity : AppCompatActivity() {
 
                     override fun onVerificationFailed(exception: FirebaseException?) {
                         Log.e(TAG, "onVerificationFailed: $exception")
-                        Toast.makeText(applicationContext, "Error: ${exception?.message}", Toast.LENGTH_LONG).show()
+                        displayError(exception?.message ?: "")
                     }
 
                     override fun onCodeSent(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
@@ -71,8 +85,21 @@ class LoginActivity : AppCompatActivity() {
         }
 
         buttonSubmitPinCode.setOnClickListener {
+
+            if (editPinCode.text.isEmpty()) {
+                editPinCode.error = "We really need that code.."
+                return@setOnClickListener
+            }
+
+            if (storedVerificationId.isEmpty()) {
+                displayError("Forgot to fill the Phone Number??")
+                return@setOnClickListener
+            }
+
             val credential = PhoneAuthProvider.getCredential(storedVerificationId, editPinCode.text.toString())
             signInWithPhoneAuthCredential(credential)
+
+            clearErrors()
         }
     }
 
@@ -82,15 +109,32 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     Log.d(TAG, "signInWithCredential:success")
 
-                    val user = task.result?.user
-                    displayUser(user)
+                    val request = UserProfileChangeRequest.Builder()
+                        .setDisplayName(editUsername.text.toString())
+                        //.setPhotoUri() // TODO Add Image
+                        .build()
+                    FirebaseAuth.getInstance().currentUser?.updateProfile(request)
+                    ?.addOnSuccessListener {
+                        displayUser(FirebaseAuth.getInstance().currentUser)
+                    }
+                    ?.addOnFailureListener {
+                        displayError("Oopps.. ${it.message}")
+                    }
+
                 } else {
+                    displayError("Failed To Sign In: ${task.exception?.message}")
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
                 }
             }
     }
 
     private fun displayUser(user: FirebaseUser?) {
+
+        FirebaseUtils.updateUserFCMToken()
+
+        textUser.visibility = View.VISIBLE
+        groupMain.visibility = View.GONE
+
         textUser.text = "User Signed In!!!" +
                 "\nName: ${user?.displayName}" +
                 "\nPhone Number: ${user?.phoneNumber}"
@@ -98,7 +142,20 @@ class LoginActivity : AppCompatActivity() {
         Handler().postDelayed({
             startActivity(Intent(this, MainActivity::class.java))
             finish()
-        }, 2000)
+        }, 3000)
+    }
+
+    private fun displayError(errorMessage: String) {
+        textError.text = errorMessage
+        textError.visibility = View.VISIBLE
+    }
+
+    private fun clearErrors() {
+        textError.visibility = View.GONE
+        textError.text = ""
+        editUsername.error = null
+        editPhoneNumber.error = null
+        editPinCode.error = null
     }
 
 }
