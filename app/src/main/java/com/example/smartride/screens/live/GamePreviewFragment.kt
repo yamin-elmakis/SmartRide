@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.NavHostFragment
 import com.example.smartride.R
 import com.example.smartride.base.BaseFragment
 import com.example.smartride.widgets.MainToolBar
@@ -23,73 +24,71 @@ class GamePreviewFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        liveSingleCta.setOnClickListener {
-//            EasyLog.e()
-//        }
         setStage("Stage 2")
     }
 
     private fun setStage(stage: String) {
-        previewStage.text = stage
-        previewStage.animate()
-            .setDuration(300)
-            .setStartDelay(DELAY)
-            .scaleX(2f)
-            .scaleY(2f)
-            .alpha(0f)
-            .withEndAction {
+        previewStage?.text = stage
+        previewStage?.animate()
+            ?.setDuration(300)
+            ?.setStartDelay(DELAY)
+            ?.scaleX(2f)
+            ?.scaleY(2f)
+            ?.alpha(0f)
+            ?.withEndAction {
                 setReady()
             }
     }
 
     private fun setReady() {
-        previewStage.text = "Ready"
-        previewStage.scaleX = 1f
-        previewStage.scaleY = 1f
-        previewStage.alpha = 1f
+        previewStage?.text = "Ready"
+        previewStage?.scaleX = 1f
+        previewStage?.scaleY = 1f
+        previewStage?.alpha = 1f
 
-        previewStage.animate()
-            .setDuration(300)
-            .setStartDelay(DELAY)
-            .scaleX(2f)
-            .scaleY(2f)
-            .alpha(0f)
-            .withEndAction {
+        previewStage?.animate()
+            ?.setDuration(300)
+            ?.setStartDelay(DELAY)
+            ?.scaleX(2f)
+            ?.scaleY(2f)
+            ?.alpha(0f)
+            ?.withEndAction {
                 setSet()
             }
     }
 
     private fun setSet() {
-        previewStage.text = "Set"
-        previewStage.scaleX = 1f
-        previewStage.scaleY = 1f
-        previewStage.alpha = 1f
+        previewStage?.text = "Set"
+        previewStage?.scaleX = 1f
+        previewStage?.scaleY = 1f
+        previewStage?.alpha = 1f
 
-        previewStage.animate()
-            .setDuration(300)
-            .setStartDelay(DELAY)
-            .scaleX(2f)
-            .scaleY(2f)
-            .alpha(0f)
-            .withEndAction {
+        previewStage?.animate()
+            ?.setDuration(300)
+            ?.setStartDelay(DELAY)
+            ?.scaleX(2f)
+            ?.scaleY(2f)
+            ?.alpha(0f)
+            ?.withEndAction {
                 setGo()
             }
     }
 
     private fun setGo() {
-        previewStage.text = "Go"
-        previewStage.scaleX = 1f
-        previewStage.scaleY = 1f
-        previewStage.alpha = 1f
+        previewStage?.text = "Go"
+        previewStage?.scaleX = 1f
+        previewStage?.scaleY = 1f
+        previewStage?.alpha = 1f
 
-        previewStage.animate()
-            .setDuration(300)
-            .setStartDelay(DELAY)
-            .scaleX(2f)
-            .scaleY(2f)
-            .alpha(0f)
-            .withEndAction {
-
+        previewStage?.animate()
+            ?.setDuration(300)
+            ?.setStartDelay(DELAY)
+            ?.scaleX(2f)
+            ?.scaleY(2f)
+            ?.alpha(0f)
+            ?.withEndAction {
+                val navController = NavHostFragment.findNavController(this)
+                navController.navigate(R.id.action_gamePreviewFragment_to_triviaFragment)
             }
     }
 }

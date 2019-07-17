@@ -8,4 +8,9 @@
     <dimen name="time_counter_sub_text_size">16sp</dimen>
     <dimen name="time_counter_dots_size">62sp</dimen>
 
+    <dimen name="trivia_margin_1">16dp</dimen>
+    <dimen name="trivia_margin_2">26dp</dimen>
+    <dimen name="trivia_margin_question">10dp</dimen>
+    <dimen name="trivia_margin_question_2">10dp</dimen>
+
 </resources>

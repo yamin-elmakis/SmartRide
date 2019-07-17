@@ -1,5 +1,6 @@
 package com.example.smartride.screens.home
 
+import android.animation.ValueAnimator
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,11 +9,9 @@ import androidx.navigation.fragment.NavHostFragment
 import com.example.smartride.R
 import com.example.smartride.base.BaseFragment
 import com.example.smartride.widgets.TimeCounterView
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import lib.yamin.easylog.EasyLog
-import android.animation.ValueAnimator
-import com.google.firebase.database.*
-import java.lang.Exception
 import java.text.SimpleDateFormat
 
 class PendingRideFragment : BaseFragment(), TimeCounterView.TimerCallbacks, ValueAnimator.AnimatorUpdateListener,
@@ -35,7 +34,6 @@ class PendingRideFragment : BaseFragment(), TimeCounterView.TimerCallbacks, Valu
     }
 
     private fun startTimer(millis: Long) {
-
         val duration = millis - System.currentTimeMillis()
 
         pendingTimer.setTime(millis)
@@ -52,10 +50,12 @@ class PendingRideFragment : BaseFragment(), TimeCounterView.TimerCallbacks, Valu
 //        pendingLottieRoute.repeatCount = 0
 //        pendingLottieRoute.playAnimation()
 
-        animator = ValueAnimator.ofFloat(0f, 1f)
-        animator?.duration = duration
-        animator?.addUpdateListener(this)
-        animator?.start()
+        if (duration > 0) {
+            animator = ValueAnimator.ofFloat(0f, 1f)
+            animator?.duration = duration
+            animator?.addUpdateListener(this)
+            animator?.start()
+        }
     }
 
     override fun onDestroyView() {
