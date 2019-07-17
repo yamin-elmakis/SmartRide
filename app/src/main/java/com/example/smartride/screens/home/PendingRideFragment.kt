@@ -28,5 +28,9 @@ class PendingRideFragment : BaseFragment() {
             EasyLog.e("close")
             pendingRideLayout.transitionToState(R.id.explanation_close)
         }
+        pendingLottieRoute.imageAssetsFolder = "assets/";
+        pendingLottieRoute.setAnimation("on_the_way.json")
+        pendingLottieRoute.repeatCount = 0
+        pendingLottieRoute.playAnimation()
     }
 }
