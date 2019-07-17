@@ -11,10 +11,15 @@ import com.example.smartride.widgets.TimeCounterView
 import kotlinx.android.synthetic.main.fragment_home.*
 import lib.yamin.easylog.EasyLog
 import android.animation.ValueAnimator
+import com.google.firebase.database.*
+import java.lang.Exception
+import java.text.SimpleDateFormat
 
-class PendingRideFragment : BaseFragment(), TimeCounterView.TimerCallbacks, ValueAnimator.AnimatorUpdateListener {
+class PendingRideFragment : BaseFragment(), TimeCounterView.TimerCallbacks, ValueAnimator.AnimatorUpdateListener,
+    ValueEventListener {
 
-    private lateinit var animator: ValueAnimator
+    private var animator: ValueAnimator? = null
+    private var timestampReference: DatabaseReference? = null
 
     override fun displayToolBar() = false
 
@@ -25,9 +30,15 @@ class PendingRideFragment : BaseFragment(), TimeCounterView.TimerCallbacks, Valu
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val duration = System.currentTimeMillis() + 10 * 1000
+        timestampReference = FirebaseDatabase.getInstance().getReference("nextTaxi/timestamp")
+        timestampReference?.addValueEventListener(this)
+    }
 
-        pendingTimer.setTime(duration)
+    private fun startTimer(millis: Long) {
+
+        val duration = millis - System.currentTimeMillis()
+
+        pendingTimer.setTime(millis)
         pendingStartInfo.setOnClickListener {
             EasyLog.e("open")
             pendingRideLayout.transitionToState(R.id.explanation_open)
@@ -42,15 +53,16 @@ class PendingRideFragment : BaseFragment(), TimeCounterView.TimerCallbacks, Valu
 //        pendingLottieRoute.playAnimation()
 
         animator = ValueAnimator.ofFloat(0f, 1f)
-        animator.duration = duration
-        animator.addUpdateListener(this)
-        animator.start()
+        animator?.duration = duration
+        animator?.addUpdateListener(this)
+        animator?.start()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
 
-        animator.removeUpdateListener(this)
+        animator?.removeUpdateListener(this)
+        timestampReference?.removeEventListener(this)
     }
 
     override fun onResume() {
@@ -88,7 +100,21 @@ class PendingRideFragment : BaseFragment(), TimeCounterView.TimerCallbacks, Valu
     }
 
     override fun onAnimationUpdate(animation: ValueAnimator?) {
-        EasyLog.d("TEST_ANIM Val: ${animation?.animatedValue as Float} - View: $pendingLottieRoute")
+        EasyLog.d("TEST_ANIM Val: ${animation?.animatedValue} - View: $pendingLottieRoute")
         pendingLottieRoute?.progress = animation?.animatedValue as Float
+    }
+
+    override fun onDataChange(dataSnapshot: DataSnapshot) {
+        try {
+            val timestamp = dataSnapshot.getValue(String::class.java)
+            val millis = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(timestamp).time
+            startTimer(millis)
+        } catch (e: Exception) {
+            EasyLog.e(e)
+        }
+    }
+
+    override fun onCancelled(dataSnapshot: DatabaseError) {
+
     }
 }
