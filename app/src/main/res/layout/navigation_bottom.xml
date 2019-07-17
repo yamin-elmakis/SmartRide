@@ -2,7 +2,7 @@
 <merge
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:wi="LinearLayout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:parentTag="LinearLayout"
     tools:orientation="horizontal"
     tools:background="@color/colorAccent">
@@ -29,27 +29,45 @@
             android:text="Leader board"/>
     </LinearLayout>
 
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/tabRide"
-        android:orientation="vertical"
-        android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:clickable="true"
         android:focusable="true">
         <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_leader_board"
-            android:tint="@drawable/selector_bottom_tab"/>
-        <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/rideIconBg"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@drawable/selector_bottom_tab"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_live_ride_tab_bg"
+            android:layout_marginTop="9dp"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_live_ride_tab"
+            android:layout_marginTop="9dp"/>
+        <LinearLayout
+            android:orientation="vertical"
             android:gravity="center"
-            android:text="Live Ride"/>
-    </LinearLayout>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true">
+            <View
+                android:layout_width="24dp"
+                android:layout_height="24dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@drawable/selector_bottom_tab"
+                android:gravity="center"
+                android:text="Live Ride"/>
+        </LinearLayout>
+
+    </FrameLayout>
 
     <LinearLayout
         android:id="@+id/tabWallet"

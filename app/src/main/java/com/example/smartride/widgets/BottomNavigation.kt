@@ -4,10 +4,13 @@ import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
 import android.view.Gravity
+import android.view.animation.Animation
 import android.widget.LinearLayout
 import com.example.smartride.R
 import com.example.smartride.base.IBottomNavigation
 import kotlinx.android.synthetic.main.navigation_bottom.view.*
+import android.view.animation.AnimationUtils
+
 
 class BottomNavigation : LinearLayout {
 
@@ -51,6 +54,8 @@ class BottomNavigation : LinearLayout {
         pendingTab?.let {
             chooseTab(it)
         }
+
+        setRideLiveState(true)
     }
 
     private fun chooseTab(tab: Tab){
@@ -71,6 +76,13 @@ class BottomNavigation : LinearLayout {
         super.onDetachedFromWindow()
 
         removeAllViews()
+    }
+
+    fun setRideLiveState(isLive: Boolean) {
+//        val liveRideAnimation = AnimationUtils.loadAnimation(context, R.anim.live_ride_tab)
+//        liveRideAnimation.repeatCount = Animation.INFINITE
+//        liveRideAnimation.repeatMode = Animation.RESTART
+//        rideIconBg.startAnimation(liveRideAnimation)
     }
 
     fun seteSelectedTab(tab: Tab) {
