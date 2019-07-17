@@ -18,4 +18,10 @@
         <item name="android:textColor">@color/red</item>
     </style>
 
+    <style name="Title">
+        <item name="android:textSize">28sp</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>
