@@ -1,101 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="20dp"
-        android:layout_gravity="center"
-        android:animateLayoutChanges="true">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textUser"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:visibility="gone"/>
+    <fragment
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/navigation_login" />
 
-        <TextView
-            android:id="@+id/textError"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textColor="#FF0000"
-            android:visibility="gone"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/editUsername"
-            app:layout_constraintVertical_chainStyle="packed"
-            tools:visibility="visible"
-            tools:text="TestError\nTestError\nTestError\nTestError\n"/>
-
-        <EditText
-            android:id="@+id/editUsername"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:lines="1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textError"
-            app:layout_constraintBottom_toTopOf="@id/editPhoneNumber"
-            android:hint="Enter Your Name"/>
-
-        <EditText
-            android:id="@+id/editPhoneNumber"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:maxLines="1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editUsername"
-            app:layout_constraintBottom_toTopOf="@id/buttonSubmitPhone"
-            android:hint="Enter Phone Number"/>
-
-        <Button
-            android:id="@+id/buttonSubmitPhone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/editPhoneNumber"
-            app:layout_constraintBottom_toTopOf="@id/editPinCode"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:text="Submit Phone Number"/>
-
-        <EditText
-            android:id="@+id/editPinCode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:maxLines="1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/buttonSubmitPhone"
-            app:layout_constraintBottom_toTopOf="@id/buttonSubmitPinCode"
-            android:hint="Enter Pin Code"/>
-
-        <Button
-            android:id="@+id/buttonSubmitPinCode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/editPinCode"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:text="Submit Pin Code"/>
-
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/groupMain"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:constraint_referenced_ids="textError, editUsername, editPhoneNumber, buttonSubmitPhone, editPinCode, buttonSubmitPinCode"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
