@@ -16,6 +16,9 @@ class TimeCounterView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
+    private var listener: TimerCallbacks? = null
+    private var currentMillis: Long? = null
+
     private var counter: CountDownTimer? = null
     private var timeData: TimerData? = null
 
@@ -38,6 +41,10 @@ class TimeCounterView @JvmOverloads constructor(
         counter = object : CountDownTimer(time - System.currentTimeMillis(), 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 post {
+
+                    currentMillis = millisUntilFinished
+                    listener?.onTick(currentMillis)
+
                     val newTimeData = millisUntilFinished.toTimerData()
                     newTimeData.changed(timeData, { hour }, action = {
                         counterHr.animateSetText("%02d".format(it))
@@ -55,6 +62,8 @@ class TimeCounterView @JvmOverloads constructor(
             override fun onFinish() {
                 EasyLog.e()
 //                text = endMessage
+                currentMillis = 0
+                listener?.onTick(0)
             }
         }
     }
@@ -70,6 +79,18 @@ class TimeCounterView @JvmOverloads constructor(
     override fun onDetachedFromWindow() {
         stopTimer()
         super.onDetachedFromWindow()
+    }
+
+    fun getTime(): Long? {
+        return currentMillis
+    }
+
+    fun setListener(listener: TimerCallbacks?) {
+        this.listener = listener
+    }
+
+    interface TimerCallbacks {
+        fun onTick(currentMillis: Long?)
     }
 }
 

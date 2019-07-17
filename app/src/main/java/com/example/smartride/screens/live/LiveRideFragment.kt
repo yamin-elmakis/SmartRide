@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.airbnb.lottie.LottieDrawable
+import androidx.navigation.fragment.NavHostFragment
 import com.example.smartride.R
 import com.example.smartride.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_live_ride.*
@@ -20,6 +20,9 @@ class LiveRideFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         liveSingleCta.setOnClickListener {
             EasyLog.e()
+
+            val navController = NavHostFragment.findNavController(this)
+            navController.navigate(R.id.action_liveRideFragment_to_stagesFragment)
         }
 
         liveLottieRoute.imageAssetsFolder = "assets/";

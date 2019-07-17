@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        tools:parentTag="LinearLayout"
-        tools:orientation="horizontal"
-        tools:background="@color/colorAccent">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:parentTag="LinearLayout"
+    tools:orientation="horizontal"
+    tools:background="@color/colorAccent">
 
     <LinearLayout
         android:id="@+id/tabBoard"
@@ -27,83 +28,36 @@
             android:gravity="center"
             android:text="Leader board"/>
     </LinearLayout>
-    <LinearLayout
-            android:id="@+id/tabRide"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:focusable="true">
+
+    <FrameLayout
+        android:id="@+id/tabRide"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:focusable="true">
         <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/tabLive"
                 android:layout_width="30dp"
-                android:layout_height="30dp"/>
-
-        <!--<ImageView-->
-        <!--android:layout_width="24dp"-->
-        <!--android:layout_height="24dp"-->
-        <!--android:src="@drawable/ic_leader_board"-->
-        <!--android:tint="@drawable/selector_bottom_tab"/>-->
-        <TextView
-                android:id="@+id/tab_live_ride"
+                android:layout_height="30dp"
+                android:layout_gravity="center_horizontal"/>
+        <LinearLayout
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+            <View
+                android:layout_width="24dp"
+                android:layout_height="24dp"/>
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@drawable/selector_bottom_tab"
                 android:gravity="center"
-                android:text="Leader board"/>
-    </LinearLayout>
+                android:text="Live Ride"/>
+        </LinearLayout>
 
-    <!--<androidx.constraintlayout.widget.ConstraintLayout-->
-    <!--android:id="@+id/tabRide"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_weight="1"-->
-    <!--android:clipChildren="false"-->
-    <!--android:clickable="true"-->
-    <!--android:focusable="true">-->
-    <!--<ImageView-->
-    <!--android:id="@+id/rideIconBg"-->
-    <!--android:layout_width="10dp"-->
-    <!--android:layout_height="10dp"-->
-    <!--app:layout_constraintStart_toStartOf="parent"-->
-    <!--app:layout_constraintEnd_toEndOf="parent"-->
-    <!--app:layout_constraintTop_toTopOf="@+id/tab_live_icon"-->
-    <!--app:layout_constraintBottom_toBottomOf="@+id/tab_live_icon"-->
-    <!--android:visibility="gone"-->
-    <!--android:src="@drawable/ic_live_ride_tab_bg" />-->
-    <!--<ImageView-->
-    <!--android:id="@+id/tab_live_icon"-->
-    <!--android:layout_width="20dp"-->
-    <!--android:layout_height="20dp"-->
-    <!--android:visibility="gone"-->
-    <!--app:layout_constraintStart_toStartOf="parent"-->
-    <!--app:layout_constraintEnd_toEndOf="parent"-->
-    <!--app:layout_constraintBottom_toTopOf="@id/tab_live_ride"-->
-
-    <!--android:src="@drawable/ic_live_ride_tab" />-->
-
-    <!--<com.airbnb.lottie.LottieAnimationView-->
-    <!--android:id="@+id/tabLive"-->
-    <!--android:layout_width="30dp"-->
-    <!--android:layout_height="30dp"-->
-    <!--app:layout_constraintStart_toStartOf="parent"-->
-    <!--app:layout_constraintEnd_toEndOf="parent"-->
-    <!--app:layout_constraintBottom_toTopOf="@id/tab_live_ride" />-->
-
-    <!--<TextView-->
-    <!--android:id="@+id/tab_live_ride"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:textColor="@drawable/selector_bottom_tab"-->
-    <!--app:layout_constraintTop_toTopOf="parent"-->
-    <!--app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--android:gravity="center"-->
-    <!--android:text="Live Ride"-->
-    <!--app:layout_constraintVertical_bias="0.52"/>-->
-
-    <!--</androidx.constraintlayout.widget.ConstraintLayout>-->
+    </FrameLayout>
 
     <LinearLayout
         android:id="@+id/tabWallet"

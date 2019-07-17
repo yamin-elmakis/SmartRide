@@ -8,6 +8,23 @@
     <fragment
             android:id="@+id/pendingRideFragment"
             android:name="com.example.smartride.screens.home.PendingRideFragment">
+
+        <action android:id="@+id/action_pendingRideFragment_to_liveRideFragment"
+                app:destination="@id/liveRideFragment"
+                app:popUpTo="@+id/navigation_main"
+                app:popUpToInclusive="true"/>
     </fragment>
+    <fragment android:id="@+id/liveRideFragment" android:name="com.example.smartride.screens.live.LiveRideFragment"
+              android:label="LiveRideFragment">
+        <action android:id="@+id/action_liveRideFragment_to_stagesFragment" app:destination="@id/stagesFragment"/>
+    </fragment>
+    <fragment android:id="@+id/stagesFragment" android:name="com.example.smartride.screens.live.StagesFragment"
+              android:label="StagesFragment">
+        <action android:id="@+id/action_stagesFragment_to_gamePreviewFragment"
+                app:destination="@id/gamePreviewFragment"/>
+    </fragment>
+    <fragment android:id="@+id/gamePreviewFragment"
+              android:name="com.example.smartride.screens.live.GamePreviewFragment"
+              android:label="GamePreviewFragment"/>
 
 </navigation>
