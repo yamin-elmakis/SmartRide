@@ -7,7 +7,7 @@
     android:animateLayoutChanges="true">
 
     <com.example.smartride.widgets.MainToolBar
-        android:id="@+id/main_toolbar"
+        android:id="@+id/mainToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,7 +22,7 @@
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/main_toolbar"
+        app:layout_constraintTop_toBottomOf="@id/mainToolbar"
         app:layout_constraintBottom_toTopOf="@id/bottom_nav"
         app:defaultNavHost="true"
         app:navGraph="@navigation/navigation_main" />
