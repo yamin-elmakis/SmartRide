@@ -88,9 +88,10 @@
 
     <ImageView
             android:id="@+id/pendingStartInfo"
-            android:layout_width="18dp"
-            android:layout_height="18dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:tint="@color/colorAccent"
+            android:padding="4dp"
             app:layout_constraintStart_toEndOf="@+id/pending_start_in"
             app:layout_constraintTop_toTopOf="@id/pending_start_in"
             app:layout_constraintBottom_toBottomOf="@id/pending_start_in"
@@ -135,37 +136,30 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/pendingExplainContainer"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@color/colorAccent80"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent">
 
-        <View
-                android:id="@+id/pendingExplainBack"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:alpha="0.8"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/pendingTextContainer"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:background="@color/colorAccent"/>
-
         <LinearLayout
                 android:id="@+id/pendingTextContainer"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:gravity="center"
                 android:background="@color/_white"
                 android:padding="12dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_height="wrap_content">
+                app:layout_constraintBottom_toBottomOf="parent" >
 
             <ImageView
+                    android:id="@+id/pendingExplanationInfo"
                     android:layout_width="56dp"
                     android:layout_height="56dp"
                     android:tint="@color/colorAccent"

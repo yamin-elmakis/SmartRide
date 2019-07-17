@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import com.example.smartride.R
 import com.example.smartride.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_home.*
+import lib.yamin.easylog.EasyLog
 
 class HomeFragment : BaseFragment() {
 
@@ -18,8 +19,14 @@ class HomeFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        pendingTimer.setTime(System.currentTimeMillis() + 75 * 1000)
         pendingStartInfo.setOnClickListener {
+            EasyLog.e("open")
             pendingRideLayout.transitionToState(R.id.explanation_open)
+        }
+        pendingExplanationInfo.setOnClickListener {
+            EasyLog.e("close")
+            pendingRideLayout.transitionToState(R.id.explanation_close)
         }
     }
 }
