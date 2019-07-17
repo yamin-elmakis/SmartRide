@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.smartride.R
+import com.example.smartride.screens.login.LoginActivity
 import com.example.smartride.screens.login.LoginViewModel
 import com.example.smartride.screens.main.MainActivity
 import com.example.smartride.utils.FirebaseUtils
@@ -100,9 +101,8 @@ class PhoneNumberFragment : Fragment() {
                     ?.addOnSuccessListener {
 //                        displayUser(FirebaseAuth.getInstance().currentUser)
                         FirebaseUtils.updateUserFCMToken()
-                        activity?.let {
-                            it.startActivity(Intent(it, MainActivity::class.java))
-                            it.finish()
+                        (activity as? LoginActivity)?.let {
+                            it.startMain()
                         }
                     }
                     ?.addOnFailureListener {

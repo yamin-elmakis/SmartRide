@@ -21,6 +21,15 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         setTitle("Login")
+
+        if (FirebaseAuth.getInstance().currentUser != null) {
+            startMain()
+        }
+    }
+
+    fun startMain() {
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
 
 //    private var storedVerificationId: String = ""
