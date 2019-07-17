@@ -10,17 +10,14 @@ import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
 
-    var counter:Int = 0
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        timer.setTime(System.currentTimeMillis() + 75 * 1000)
-        text.setOnClickListener {
-            textFlipper.animateSetText((++counter).toString())
+        pendingStartInfo.setOnClickListener {
+            pendingRideLayout.transitionToState(R.id.explanation_open)
         }
     }
 }

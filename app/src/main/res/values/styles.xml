@@ -6,16 +6,17 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/_white</item>
     </style>
 
     <style name="CounterText">
         <item name="android:textSize">@dimen/time_counter_text_size</item>
-        <item name="android:textColor">@color/red</item>
+        <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
     <style name="CounterSubText">
         <item name="android:textSize">@dimen/time_counter_sub_text_size</item>
-        <item name="android:textColor">@color/red</item>
+        <item name="android:textColor">@color/blue_grey_100</item>
     </style>
 
 </resources>

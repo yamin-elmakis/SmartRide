@@ -18,14 +18,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="7dp"/>
+            app:layout_constraintGuide_begin="6dp"/>
 
     <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineSubText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="38dp"/>
+            app:layout_constraintGuide_begin="80dp"/>
 
     <com.example.smartride.widgets.FlipTextView
             android:id="@+id/counterMin"

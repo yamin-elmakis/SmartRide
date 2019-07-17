@@ -3,8 +3,10 @@
         xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="wrap_content"
+        android:background="@drawable/blue_300_round"
+        android:padding="4dp"
+        android:layout_height="wrap_content">
 
     <ImageView
             android:id="@+id/userScoreIcon"
@@ -20,9 +22,10 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@+id/userScoreIcon"
             android:textSize="16sp"
-            android:paddingEnd="4dp"
-            android:paddingStart="4dp"
-            tools:text="0"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            android:textStyle="bold"
+            android:text="0"
             app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageView
