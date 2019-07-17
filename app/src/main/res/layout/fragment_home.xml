@@ -110,8 +110,8 @@
             android:focusable="true"
             android:text="00:00:00"/>
 
-    <ImageView
-            android:id="@+id/pendingRoute"
+    <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/pendingLottieRoute"
             android:layout_width="match_parent"
             android:layout_marginTop="12dp"
             android:layout_marginStart="8dp"
@@ -125,8 +125,8 @@
             android:id="@+id/pending_your_driver"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/pendingRoute"
-            app:layout_constraintStart_toStartOf="@+id/pendingRoute"
+            app:layout_constraintTop_toBottomOf="@+id/pendingLottieRoute"
+            app:layout_constraintStart_toStartOf="@+id/pendingLottieRoute"
             android:textSize="24sp"
             android:textColor="@color/blue_grey_100"
             android:stateListAnimator="@animator/raise"

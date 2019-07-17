@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:background="@color/grey_50"
+        android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp">
+
+        <com.example.smartride.widgets.FlipTextView
+                android:id="@+id/liveDistanceLeft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:textSize="48sp"
+                android:text="22"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/blue_grey_100"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="25dp"
+                app:layout_constraintStart_toEndOf="@id/liveDistanceLeft"
+                app:layout_constraintTop_toTopOf="@id/liveDistanceLeft"
+                android:text="KM"/>
+
+        <TextView
+                android:id="@+id/live_from"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/blue_grey_100"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/liveDistanceLeft"
+                android:text="From your destination"/>
+
+        <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/liveLottieRoute"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="12dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/live_from"/>
+
+        <TextView
+                android:id="@+id/live_multiplayer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/blue_grey_100"
+                android:layout_marginTop="36dp"
+                android:textAllCaps="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/liveLottieRoute"
+                android:text="Multiplayer"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/live_multi_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/primary_round"
+                android:backgroundTint="@color/_white"
+                app:layout_constraintTop_toBottomOf="@id/live_multiplayer"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                    android:id="@+id/live_multi_image"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="26dp"
+                    android:layout_marginBottom="26dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:src="@drawable/ic_info"/>
+
+            <TextView
+                    android:id="@+id/live_multi_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorAccent"
+                    app:layout_constraintStart_toEndOf="@id/live_multi_image"
+                    app:layout_constraintTop_toTopOf="@id/live_multi_image"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="Challenge an online rider"/>
+
+            <TextView
+                    android:id="@+id/live_multi_cta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    app:layout_constraintStart_toStartOf="@id/live_multi_title"
+                    app:layout_constraintEnd_toEndOf="@id/live_multi_title"
+                    app:layout_constraintTop_toBottomOf="@id/live_multi_title"
+                    android:background="@drawable/selector_cta_blue"
+                    android:stateListAnimator="@animator/raise"
+                    android:textSize="16sp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:paddingStart="24dp"
+                    android:paddingEnd="24dp"
+                    android:textColor="@color/_white"
+                    android:text="Game on!"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+                android:id="@+id/live_single"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/blue_grey_100"
+                android:layout_marginTop="36dp"
+                android:textAllCaps="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/live_multi_container"
+                android:text="Single player"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/live_single_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/primary_round"
+                android:backgroundTint="@color/_white"
+                app:layout_constraintTop_toBottomOf="@id/live_single"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                    android:id="@+id/live_single_image"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="26dp"
+                    android:layout_marginBottom="26dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:tint="@color/colorPrimary"
+                    android:src="@drawable/ic_singel_user"/>
+
+            <TextView
+                    android:id="@+id/live_single_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorAccent"
+                    app:layout_constraintStart_toEndOf="@id/live_single_image"
+                    app:layout_constraintTop_toTopOf="@id/live_single_image"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="i'm a lone wolf"/>
+
+            <TextView
+                    android:id="@+id/liveSingleCta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    app:layout_constraintStart_toStartOf="@id/live_single_title"
+                    app:layout_constraintEnd_toEndOf="@id/live_single_title"
+                    app:layout_constraintTop_toBottomOf="@id/live_single_title"
+                    android:background="@drawable/selector_cta_blue"
+                    android:stateListAnimator="@animator/raise"
+                    android:textSize="16sp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:paddingStart="24dp"
+                    android:paddingEnd="24dp"
+                    android:textColor="@color/_white"
+                    android:text="Play alone"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
