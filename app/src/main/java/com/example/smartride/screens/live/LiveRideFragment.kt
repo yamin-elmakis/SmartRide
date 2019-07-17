@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.NavHostFragment
+import com.airbnb.lottie.LottieDrawable
 import com.example.smartride.R
 import com.example.smartride.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_live_ride.*
