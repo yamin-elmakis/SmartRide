@@ -2,45 +2,39 @@ package com.example.smartride.screens.main
 
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.NavigationRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import com.example.smartride.R
+import com.example.smartride.base.IBottomNavigation
 import com.example.smartride.base.IToolBar
+import com.example.smartride.widgets.BottomNavigation
 import com.example.smartride.widgets.MainToolBar
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), IToolBar {
+class MainActivity : AppCompatActivity(), IToolBar, IBottomNavigation {
+
+    companion object {
+        private const val KEY_SELECTED_GRAPH = "key_selected_graph"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         if (savedInstanceState == null) {
-            setupBottomNavigationBar()
-        } // Else, need to wait for onRestoreInstanceState
+            bottomNavigation.seteSelectedTab(BottomNavigation.Tab.RIDE)
+        }
     }
 
-    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
-        super.onRestoreInstanceState(savedInstanceState)
-        // Now that BottomNavigationBar has restored its instance state
-        // and its selectedItemId, we can proceed with setting up the
-        // BottomNavigationBar with Navigation
-        setupBottomNavigationBar()
-    }
-
-    /**
-     * Called on first creation and when restoring state.
-     */
-    private fun setupBottomNavigationBar() {
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)
-
-        // val navGraphIds = listOf(R.navigation.navigation_main, R.navigation.list, R.navigation.form)
-        val controller = findNavController(R.id.nav_host_fragment)
-
-        // Setup the bottom navigation view with a list of navigation graphs
-        bottomNavigationView.setupWithNavController(controller)
-    }
+//    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+//        super.onRestoreInstanceState(savedInstanceState)
+//        // Now that BottomNavigationBar has restored its instance state
+//        // and its selectedItemId, we can proceed with setting up the
+//        // BottomNavigationBar with Navigation
+//        setupBottomNavigationBar()
+//    }
 
     override fun onSupportNavigateUp(): Boolean {
         return findNavController(R.id.nav_host_fragment).navigateUp()
@@ -60,6 +54,28 @@ class MainActivity : AppCompatActivity(), IToolBar {
 
     override fun onToolBarBackPress() {
         onBackPressed()
+    }
+
+    override fun onLeaderBoardClicked() {
+        setUpNavigation(R.navigation.navigation_leaders)
+    }
+
+    override fun onRideClicked() {
+        setUpNavigation(R.navigation.navigation_main)
+    }
+
+    override fun onWalletClicked() {
+        setUpNavigation(R.navigation.navigation_wallet)
+    }
+
+    private fun setUpNavigation(@NavigationRes naviagationGraph: Int) {
+        val navHost = nav_host_fragment as NavHostFragment
+        val graph = navHost.navController.navInflater.inflate(naviagationGraph)
+
+        navHost.navController.graph = graph
+
+
+//        NavigationUI.setupActionBarWithNavController(this, navHost.navController)
     }
 
 }

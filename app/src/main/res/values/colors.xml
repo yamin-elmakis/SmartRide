@@ -21,4 +21,6 @@
     <color name="yellow_faded">#50FFEB3B</color>
     <color name="purple_faded">#309C27B0</color>
     <color name="_white">#FFF</color>
+
+    <color name="bottom_tab_gray">#828282</color>
 </resources>

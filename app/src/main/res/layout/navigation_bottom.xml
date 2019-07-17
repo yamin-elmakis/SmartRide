@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:wi="LinearLayout"
+    tools:parentTag="LinearLayout"
+    tools:orientation="horizontal"
+    tools:background="@color/colorAccent">
+
+    <LinearLayout
+        android:id="@+id/tabBoard"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:focusable="true">
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_leader_board"
+            android:tint="@drawable/selector_bottom_tab"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@drawable/selector_bottom_tab"
+            android:gravity="center"
+            android:text="Leader board"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tabRide"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:focusable="true">
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_leader_board"
+            android:tint="@drawable/selector_bottom_tab"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@drawable/selector_bottom_tab"
+            android:gravity="center"
+            android:text="Live Ride"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tabWallet"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:focusable="true">
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_wallet"
+            android:tint="@drawable/selector_bottom_tab"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@drawable/selector_bottom_tab"
+            android:gravity="center"
+            android:text="Wallet"/>
+    </LinearLayout>
+
+
+</merge>
