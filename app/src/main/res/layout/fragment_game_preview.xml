@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp"
+        android:background="@color/grey_50">
+
+    <com.example.smartride.widgets.FlipTextView
+            android:id="@+id/previewDistanceLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            android:textSize="48sp"
+            android:text="22"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/blue_grey_100"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="25dp"
+            app:layout_constraintStart_toEndOf="@id/previewDistanceLeft"
+            app:layout_constraintTop_toTopOf="@id/previewDistanceLeft"
+            android:text="KM"/>
+
+    <TextView
+            android:id="@+id/preview_from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/blue_grey_100"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/previewDistanceLeft"
+            android:text="From your destination"/>
+
+    <TextView
+            android:id="@+id/previewStage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="64sp"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="Stage 2"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
