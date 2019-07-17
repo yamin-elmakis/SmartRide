@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/navigation_main"
-    app:startDestination="@id/homeFragment">
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/navigation_main"
+        app:startDestination="@id/pendingRideFragment">
 
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.example.smartride.screens.home.HomeFragment" >
+            android:id="@+id/pendingRideFragment"
+            android:name="com.example.smartride.screens.home.PendingRideFragment">
     </fragment>
 
 </navigation>
