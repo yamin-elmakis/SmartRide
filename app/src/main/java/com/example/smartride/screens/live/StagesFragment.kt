@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.NavHostFragment
 import com.example.smartride.R
 import com.example.smartride.base.BaseFragment
 import com.example.smartride.widgets.MainToolBar
@@ -22,6 +23,9 @@ class StagesFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         stagesLottieStages.setOnClickListener {
             EasyLog.e()
+
+            val navController = NavHostFragment.findNavController(this)
+            navController.navigate(R.id.action_stagesFragment_to_gamePreviewFragment)
         }
     }
 }
