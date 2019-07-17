@@ -36,24 +36,16 @@
         android:layout_weight="1"
         android:clickable="true"
         android:focusable="true">
-        <ImageView
-            android:id="@+id/rideIconBg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/ic_live_ride_tab_bg"
-            android:layout_marginTop="9dp"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/ic_live_ride_tab"
-            android:layout_marginTop="9dp"/>
+        <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/tabLive"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_horizontal"/>
         <LinearLayout
             android:orientation="vertical"
             android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent" >
             <View
                 android:layout_width="24dp"
                 android:layout_height="24dp"/>
