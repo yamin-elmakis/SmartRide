@@ -11,6 +11,10 @@ import kotlinx.android.synthetic.main.fragment_game_preview.*
 
 class GamePreviewFragment : BaseFragment() {
 
+    companion object {
+        const val DELAY = 1000L
+    }
+
     override fun toolBarMode() = MainToolBar.ToolBarMode.BACK
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -29,7 +33,7 @@ class GamePreviewFragment : BaseFragment() {
         previewStage.text = stage
         previewStage.animate()
             .setDuration(300)
-            .setStartDelay(500)
+            .setStartDelay(DELAY)
             .scaleX(2f)
             .scaleY(2f)
             .alpha(0f)
@@ -40,9 +44,47 @@ class GamePreviewFragment : BaseFragment() {
 
     private fun setReady() {
         previewStage.text = "Ready"
+        previewStage.scaleX = 1f
+        previewStage.scaleY = 1f
+        previewStage.alpha = 1f
+
         previewStage.animate()
             .setDuration(300)
-            .setStartDelay(500)
+            .setStartDelay(DELAY)
+            .scaleX(2f)
+            .scaleY(2f)
+            .alpha(0f)
+            .withEndAction {
+                setSet()
+            }
+    }
+
+    private fun setSet() {
+        previewStage.text = "Set"
+        previewStage.scaleX = 1f
+        previewStage.scaleY = 1f
+        previewStage.alpha = 1f
+
+        previewStage.animate()
+            .setDuration(300)
+            .setStartDelay(DELAY)
+            .scaleX(2f)
+            .scaleY(2f)
+            .alpha(0f)
+            .withEndAction {
+                setGo()
+            }
+    }
+
+    private fun setGo() {
+        previewStage.text = "Go"
+        previewStage.scaleX = 1f
+        previewStage.scaleY = 1f
+        previewStage.alpha = 1f
+
+        previewStage.animate()
+            .setDuration(300)
+            .setStartDelay(DELAY)
             .scaleX(2f)
             .scaleY(2f)
             .alpha(0f)
