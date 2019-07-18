@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
 import android.view.Gravity
+import android.view.View
 import android.view.animation.Animation
 import android.widget.LinearLayout
 import com.example.smartride.R
@@ -79,11 +80,15 @@ class BottomNavigation @JvmOverloads constructor(
             tabLive.repeatCount = LottieDrawable.INFINITE
             tabLive.playAnimation()
 
+            imagePendingRide.visibility = View.GONE
+
             textRide.text = "Live Ride"
         } else {
             tabLive.pauseAnimation()
             tabLive.progress = 0.5f
             textRide.text = "Pending Ride"
+
+            imagePendingRide.visibility = View.VISIBLE
         }
 //        if (isLive) {
 //            rideIconBg.animate()
