@@ -12,12 +12,18 @@ import com.example.smartride.base.IBottomNavigation
 import com.example.smartride.base.IToolBar
 import com.example.smartride.widgets.BottomNavigation
 import com.example.smartride.widgets.MainToolBar
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_main.*
+import lib.yamin.easylog.EasyLog
 
-class MainActivity : AppCompatActivity(), IToolBar, IBottomNavigation {
+class MainActivity : AppCompatActivity(), IToolBar, IBottomNavigation, ValueEventListener {
+
+    private var timestampReference: DatabaseReference? = null
 
     companion object {
         private const val KEY_SELECTED_GRAPH = "key_selected_graph"
+
+        var userScore: Int = 0
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +32,15 @@ class MainActivity : AppCompatActivity(), IToolBar, IBottomNavigation {
         if (savedInstanceState == null) {
             bottomNavigation.seteSelectedTab(BottomNavigation.Tab.RIDE)
         }
+
+        timestampReference = FirebaseDatabase.getInstance().getReference("userScore")
+        timestampReference?.addValueEventListener(this)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        timestampReference?.removeEventListener(this)
     }
 
 //    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
@@ -76,6 +91,18 @@ class MainActivity : AppCompatActivity(), IToolBar, IBottomNavigation {
 
 
 //        NavigationUI.setupActionBarWithNavController(this, navHost.navController)
+    }
+
+    override fun onDataChange(dataSnapshot: DataSnapshot) {
+        try {
+            userScore = dataSnapshot.getValue(Int::class.java) ?: 0
+        } catch (e: Exception) {
+            EasyLog.e(e)
+        }
+    }
+
+    override fun onCancelled(p0: DatabaseError) {
+
     }
 
 }
