@@ -24,7 +24,11 @@
                 android:screenOrientation="portrait"
                 android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http"
+                      android:host="bit.ly" />
             </intent-filter>
         </activity>
 
