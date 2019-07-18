@@ -31,23 +31,18 @@ class StagesFragment : BaseFragment() {
 
             EasyLog.d("Current Stage: ${it.currentStage}")
 
-
+            when (it.currentStage) {
+                0 -> setSnakeAnimation(0f, 0.01f)
+                1 -> setSnakeAnimation(0f, 0.06f)
+                2 -> setSnakeAnimation(0.06f, 0.1f)
+                3 -> setSnakeAnimation(0.1f, 0.13f)
+                4 -> setSnakeAnimation(0.13f, 0.17f)
+                5 -> setSnakeAnimation(0.17f, 0.20f)
+                6 -> setSnakeAnimation(0.20f, 0.23f)
+                7 -> setSnakeAnimation(0.23f, 0.27f)
+                8 -> setSnakeAnimation(0.27f, 0.31f)
+            }
         })
-    }
-
-    private var stage: Int = -1
-    private fun update() {
-        when (/*it.currentStage*/stage) {
-            0 -> setSnakeAnimation(0f, 0.01f)
-            1 -> setSnakeAnimation(0f, 0.06f)
-            2 -> setSnakeAnimation(0.06f, 0.1f)
-            3 -> setSnakeAnimation(0.1f, 0.13f)
-            4 -> setSnakeAnimation(0.13f, 0.15f)
-            5 -> setSnakeAnimation(0.15f, 0.22f)
-            6 -> setSnakeAnimation(0.22f, 0.26f)
-            7 -> setSnakeAnimation(0.30f, 0.34f)
-            8 -> setSnakeAnimation(0.34f, 0.38f)
-        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -57,12 +52,10 @@ class StagesFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         stagesLottieStages.setOnClickListener {
-            stage++
-            update()
-//            EasyLog.e()
-//
-//            val navController = NavHostFragment.findNavController(this)
-//            navController.navigate(R.id.action_stagesFragment_to_gamePreviewFragment)
+            EasyLog.e()
+
+            val navController = NavHostFragment.findNavController(this)
+            navController.navigate(R.id.action_stagesFragment_to_gamePreviewFragment)
         }
     }
 
