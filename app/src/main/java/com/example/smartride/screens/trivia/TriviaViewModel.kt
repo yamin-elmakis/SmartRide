@@ -103,6 +103,13 @@ class TriviaViewModel : ViewModel(), ValueEventListener {
         }
     }
 
+    fun startNewStage() {
+        questionData.value?.let {
+            val newState = it.copy(finishedStage = false)
+            questionData.postValue(newState)
+        }
+    }
+
     fun onRideStarted() {
         if (!hasRideStarted) {
             hasRideStarted = true

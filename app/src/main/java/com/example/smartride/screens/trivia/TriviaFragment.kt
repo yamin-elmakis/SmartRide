@@ -93,6 +93,7 @@ class TriviaFragment : BaseFragment() {
         })
         state.changed(lastState, { finishedStage }, action = {
             if (it) {
+                EasyLog.e("finishedStage")
                 requireActivity().onBackPressed()
             }
         })

@@ -47,6 +47,7 @@ class StagesFragment : BaseFragment() {
         triviaVM.rideData.observe(this, Observer { state ->
             handleState(state)
         })
+        triviaVM.startNewStage()
     }
 
     private fun handleState(state: RideState) {
