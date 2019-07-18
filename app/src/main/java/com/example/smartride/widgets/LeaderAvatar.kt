@@ -21,41 +21,6 @@ class LeaderAvatar @JvmOverloads constructor(
         inflate(context, R.layout.avatar_leader, this)
     }
 
-//
-//
-//    constructor(context: Context, isTop: Boolean, isMe: Boolean, useLargeIcon: Boolean) : super(context) {
-//
-//        this.isTop = isTop
-//        this.isMe = isMe
-//        this.useLargeAvatar = useLargeIcon
-//
-//        init(null)
-//    }
-//
-//    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-//        init(attrs)
-//    }
-//
-//    private fun init(attrs: AttributeSet?) {
-//
-//        inflate(context, R.layout.avatar_leader, this)
-//
-//        attrs?.let {
-//            val typedArray = context.obtainStyledAttributes(it, R.styleable.LeaderAvatar)
-//            try {
-//                isTop = typedArray.getBoolean(R.styleable.LeaderAvatar_isTop, false)
-//                isMe = typedArray.getBoolean(R.styleable.LeaderAvatar_isMe, false)
-//                useLargeAvatar = typedArray.getBoolean(R.styleable.LeaderAvatar_useLargeIcon, false)
-//            } catch (e: Exception) {
-//
-//            } finally {
-//                typedArray.recycle()
-//            }
-//        }
-//
-//        setData()
-//    }
-
     fun setData(isTop: Boolean, useLargeAvatar: Boolean, position: Int, user: LeaderBoardFragment.LeaderUser) {
 
         if (user.isMe) {

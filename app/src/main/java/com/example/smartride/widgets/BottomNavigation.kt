@@ -14,17 +14,13 @@ import com.airbnb.lottie.LottieDrawable
 import kotlinx.android.synthetic.main.fragment_home.*
 import lib.yamin.easylog.EasyLog
 
-class BottomNavigation : LinearLayout {
+class BottomNavigation @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : LinearLayout(context, attrs, defStyleAttr) {
 
-    constructor(context: Context) : super(context)
-
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
-
-    private var pendingTab: Tab? = null
-
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
-
+    init {
         orientation = HORIZONTAL
         gravity = Gravity.CENTER_HORIZONTAL
         clipChildren = false
@@ -53,12 +49,6 @@ class BottomNavigation : LinearLayout {
                 it.onWalletClicked()
             }
         }
-
-        pendingTab?.let {
-            chooseTab(it)
-        }
-
-        setRideLiveState(true)
     }
 
     private fun chooseTab(tab: Tab){
@@ -88,6 +78,12 @@ class BottomNavigation : LinearLayout {
             tabLive.setAnimation("live_ride.json")
             tabLive.repeatCount = LottieDrawable.INFINITE
             tabLive.playAnimation()
+
+            textRide.text = "Live Ride"
+        } else {
+            tabLive.pauseAnimation()
+            tabLive.progress = 0.5f
+            textRide.text = "Pending Ride"
         }
 //        if (isLive) {
 //            rideIconBg.animate()
@@ -100,11 +96,7 @@ class BottomNavigation : LinearLayout {
     }
 
     fun seteSelectedTab(tab: Tab) {
-        if (isAttachedToWindow) {
-            chooseTab(tab)
-        } else {
-            pendingTab = tab
-        }
+        chooseTab(tab)
     }
 
     enum class Tab {

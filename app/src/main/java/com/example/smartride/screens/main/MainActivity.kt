@@ -88,6 +88,10 @@ class MainActivity : AppCompatActivity(), IToolBar, IBottomNavigation, ValueEven
         setUpNavigation(R.navigation.navigation_wallet)
     }
 
+    override fun setRideLiveState(isLive: Boolean) {
+        bottomNavigation.setRideLiveState(isLive)
+    }
+
     private fun setUpNavigation(@NavigationRes naviagationGraph: Int) {
         val navHost = nav_host_fragment as NavHostFragment
         val graph = navHost.navController.navInflater.inflate(naviagationGraph)
