@@ -2,25 +2,58 @@ package com.example.smartride.screens.trivia
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.database.*
+import lib.yamin.easylog.EasyLog
+import java.lang.Exception
 
-class TriviaViewModel : ViewModel() {
+class TriviaViewModel : ViewModel(), ValueEventListener {
+
+    override fun onCancelled(p0: DatabaseError) {
+
+    }
+
+    override fun onDataChange(dataSnapshot: DataSnapshot) {
+        notes.clear()
+        try {
+            dataSnapshot.children.forEachIndexed { index, dataSnapshot ->
+//                EasyLog.d("Ques: $it")
+                val question = dataSnapshot.child("q").value as String
+
+                val answers = mutableListOf<TriviaModel.Answer>()
+
+                dataSnapshot.child("answers").children.forEachIndexed { index, dataSnapshot ->
+                    val answer = dataSnapshot.child("a").value as String
+                    val isCorrect = dataSnapshot.child("isCorrect").value as Boolean
+
+                    answers.add(TriviaModel.Answer(answer, isCorrect))
+                }
+
+                notes.add(TriviaModel.Question(question, answers))
+            }
+
+            EasyLog.d("Ques Final List: $notes")
+
+        } catch (e: Exception) {
+
+        }
+    }
 
     var currentQuestion: Int = 0
     val notes: MutableList<TriviaModel.Question> = mutableListOf()
 
     val questionData: MutableLiveData<TriviaState> = MutableLiveData()
 
+    private var databaseReference: DatabaseReference? = null
+
     init {
-        notes.add(TriviaModel.Question("why som  log sdjh ass qie sdfjh thisd jsdhf hoew will be 2 lines", listOf(
-            TriviaModel.Answer("1 habd sdhfj kjhsd kjhfc kjsdh ksfd f jkdf kdf  dkf j dkf jh dkf jdf df df d f"),
-            TriviaModel.Answer("2"),
-            TriviaModel.Answer("3", isTheRightOne = true),
-            TriviaModel.Answer("4"))))
-        notes.add(TriviaModel.Question("how", listOf(
-            TriviaModel.Answer("11"),
-            TriviaModel.Answer("22", isTheRightOne = true),
-            TriviaModel.Answer("33", isTheRightOne = false),
-            TriviaModel.Answer("44"))))
+        databaseReference = FirebaseDatabase.getInstance().getReference("questions")
+        databaseReference?.addValueEventListener(this)
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+
+        databaseReference?.removeEventListener(this)
     }
 
     fun updateNextQuestion() {
