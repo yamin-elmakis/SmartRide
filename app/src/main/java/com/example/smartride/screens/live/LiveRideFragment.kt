@@ -1,5 +1,6 @@
 package com.example.smartride.screens.live
 
+import android.animation.ValueAnimator
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +9,6 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.NavHostFragment
-import com.airbnb.lottie.LottieDrawable
 import com.example.smartride.R
 import com.example.smartride.base.BaseFragment
 import com.example.smartride.screens.trivia.RideState
@@ -21,7 +21,8 @@ import lib.yamin.easylog.EasyLog
 class LiveRideFragment : BaseFragment() {
 
     private lateinit var triviaVM: TriviaViewModel
-    var lastState = RideState(-1, 0, 0)
+    var lastState = RideState(-1, -1, 0)
+    private var animator: ValueAnimator? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_live_ride, container, false)
@@ -44,18 +45,52 @@ class LiveRideFragment : BaseFragment() {
 
         liveLottieRoute.imageAssetsFolder = "assets/";
         liveLottieRoute.setAnimation("on_the_ride.json")
-        liveLottieRoute.repeatCount = LottieDrawable.INFINITE
-        liveLottieRoute.playAnimation()
 
-        triviaVM.rideData.observe(this, Observer {
-            it.changed(lastState, { distanceToDestination }, action = {
-                liveDistanceLeft.animateSetText("$it")
-            })
-
+        triviaVM.rideData.observe(this, Observer { state ->
+            handleState(state)
         })
     }
 
-    fun setDistanceLeft(distanceLeft: Int) {
+    private fun handleState(state: RideState) {
+        if (lastState.rideDistance < 0) {
+            liveLottieRoute?.progress = 1 - (state.distanceToDestination.toFloat() / state.rideDistance.toFloat())
+        } else state.changed(lastState, { distanceToDestination }, action = {
+            setDistanceLeft(it)
+
+            EasyLog.e("last: ${lastState.distanceToDestination}")
+            EasyLog.e("cur: ${state.distanceToDestination}")
+            EasyLog.e("total: ${state.rideDistance}")
+            setDistanceAnimation(
+                from = 1 - (lastState.distanceToDestination.toFloat() / state.rideDistance.toFloat()),
+                to = 1 - (state.distanceToDestination.toFloat() / state.rideDistance.toFloat())
+            )
+        })
+
+        lastState = state
+    }
+
+    private fun setDistanceLeft(distanceLeft: Int) {
         liveDistanceLeft.animateSetText(distanceLeft.toString())
     }
+
+    private fun setDistanceAnimation(from: Float, to: Float) {
+        EasyLog.e("from: $from, to: $to")
+        animator?.cancel()
+        animator?.removeAllUpdateListeners()
+
+        animator = ValueAnimator.ofFloat(from, to)
+        animator?.duration = TriviaViewModel.DISTANCE_DELTA
+        animator?.addUpdateListener {
+            liveLottieRoute?.progress = it.animatedValue as Float
+        }
+        animator?.start()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        animator?.cancel()
+        animator?.removeAllUpdateListeners()
+    }
+
 }

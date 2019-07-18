@@ -92,11 +92,15 @@ class TriviaViewModel : ViewModel(), ValueEventListener {
     }
 
     private fun sendFinishedStage() {
-        val currentStage = rideData.value!!.currentStage + 1
-        rideData.postValue(rideData.value!!.copy(currentStage = currentStage))
+        rideData.value?.let {
+            val currentStage = it.currentStage +1
+            rideData.postValue(it.copy(currentStage = currentStage))
+        }
 
-        val newState = questionData.value!!.copy(finishedStage = true)
-        questionData.postValue(newState)
+        questionData.value?.let {
+            val newState = it.copy(finishedStage = true)
+            questionData.postValue(newState)
+        }
     }
 
     fun onRideStarted() {
@@ -107,11 +111,15 @@ class TriviaViewModel : ViewModel(), ValueEventListener {
     }
 
     private fun getSomeDistance() {
-        val currentDistance = rideData.value!!.distanceToDestination - 5
-        rideData.postValue(rideData.value!!.copy(distanceToDestination = currentDistance))
-        Handler().postDelayed({
-            getSomeDistance()
-        }, DISTANCE_DELTA)
+        rideData.value?.let {
+            val currentDistance = it.distanceToDestination - 5
+            if (currentDistance > 0) {
+                rideData.postValue(it.copy(distanceToDestination = currentDistance))
+                Handler().postDelayed({
+                    getSomeDistance()
+                }, DISTANCE_DELTA)
+            }
+        }
     }
 
     override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -164,8 +172,8 @@ data class TriviaState(
 
 data class RideState(
     val currentStage: Int = 0,
-    val rideDistance: Int = 50,
-    val distanceToDestination: Int = 22
+    val rideDistance: Int = 450,
+    val distanceToDestination: Int = 340
 )
 
 

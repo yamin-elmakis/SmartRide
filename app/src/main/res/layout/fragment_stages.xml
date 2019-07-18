@@ -3,8 +3,8 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/grey_50" >
+        android:layout_height="match_parent" xmlns:tools="http://schemas.android.com/tools"
+        android:background="@color/grey_50">
 
     <com.example.smartride.widgets.FlipTextView
             android:id="@+id/stagesDistanceLeft"
@@ -17,7 +17,7 @@
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
             android:textSize="48sp"
-            android:text="22"/>
+            tools:text="22"/>
 
     <TextView
             android:layout_width="wrap_content"

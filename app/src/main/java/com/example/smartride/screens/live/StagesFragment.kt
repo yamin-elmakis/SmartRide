@@ -1,6 +1,7 @@
 package com.example.smartride.screens.live
 
 import android.animation.ValueAnimator
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.NavHostFragment
 import com.example.smartride.R
 import com.example.smartride.base.BaseFragment
+import com.example.smartride.screens.trivia.RideState
 import com.example.smartride.screens.trivia.TriviaViewModel
 import com.example.smartride.screens.trivia.TriviaViewModelFactory
 import com.example.smartride.utils.changed
@@ -19,9 +21,16 @@ import lib.yamin.easylog.EasyLog
 
 class StagesFragment : BaseFragment() {
 
+    private lateinit var triviaVM: TriviaViewModel
+    var lastState = RideState(-1, -1, 0)
     private var animator: ValueAnimator? = null
 
     override fun toolBarMode() = MainToolBar.ToolBarMode.BACK
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        triviaVM = ViewModelProviders.of(requireActivity(), TriviaViewModelFactory()).get(TriviaViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,6 +73,15 @@ class StagesFragment : BaseFragment() {
 //            val navController = NavHostFragment.findNavController(this)
 //            navController.navigate(R.id.action_stagesFragment_to_gamePreviewFragment)
         }
+        triviaVM.rideData.observe(this, Observer { state ->
+            handleState(state)
+        })
+    }
+
+    private fun handleState(state: RideState) {
+        state.changed(lastState, { distanceToDestination }, action = {
+            stagesDistanceLeft.animateSetText(it.toString())
+        })
     }
 
     private fun setSnakeAnimation(from: Float, to: Float) {
