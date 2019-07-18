@@ -63,7 +63,7 @@ class LeaderBoardFragment : BaseFragment() {
             LeaderUser(name = "Tony", avatar = R.drawable.ic_avatar_leader_2, score = 435),
             LeaderUser(name = "Peter", avatar = R.drawable.ic_avatar_leader_2, score = 112),
             LeaderUser(name = "Naomi", avatar = R.drawable.ic_avatar_leader_naomi, score = 353),
-            LeaderUser(isMe = true, name = FirebaseAuth.getInstance().currentUser?.displayName ?: "", avatar = R.drawable.ic_avatar_leader_me, score = MainActivity.userScore)
+            LeaderUser(isMe = true, name = FirebaseAuth.getInstance().currentUser?.displayName ?: "", avatar = R.drawable.ic_avatar_leader_me, score = MainActivity.userScore.value ?: 0)
         )
 
     }

@@ -9,9 +9,11 @@ import androidx.navigation.fragment.NavHostFragment
 import com.example.smartride.R
 import com.example.smartride.base.BaseFragment
 import com.example.smartride.base.IBottomNavigation
+import com.example.smartride.screens.main.MainActivity
 import com.example.smartride.widgets.TimeCounterView
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.view_user_score.*
 import lib.yamin.easylog.EasyLog
 import java.text.SimpleDateFormat
 
@@ -40,6 +42,14 @@ class PendingRideFragment : BaseFragment(), TimeCounterView.TimerCallbacks, Valu
         timestampMillis?.let {
             startTimer(it)
         }
+
+        val disposable = MainActivity.userScore.subscribe({
+            userScore.text = it.toString()
+        },{
+
+        })
+
+        compositeDisposable.add(disposable)
     }
 
     private fun startTimer(millis: Long) {
