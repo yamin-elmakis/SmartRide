@@ -9,7 +9,11 @@ import lib.yamin.easylog.EasyLog
 
 class TriviaViewModel : ViewModel(), ValueEventListener {
 
-    var currentStage = 1
+    companion object{
+        const val DISTANCE_DELTA = 1000L
+    }
+
+    private var hasRideStarted: Boolean = false
     private var currentQuestion: Int = 0
     private val questions: MutableList<TriviaModel.Question> = mutableListOf()
 
@@ -79,9 +83,7 @@ class TriviaViewModel : ViewModel(), ValueEventListener {
 
             currentQuestion = (currentQuestion + 1) % questions.size
 
-            EasyLog.e("currentStage: $currentStage:: ${currentStage % 3 == 0}")
             if (currentQuestion % 3 == 0) {
-                currentStage++
                 sendFinishedStage()
             } else {
                 updateNextQuestion()
@@ -98,8 +100,18 @@ class TriviaViewModel : ViewModel(), ValueEventListener {
     }
 
     fun onRideStarted() {
-        val currentDistance = rideData.value!!.distanceToDestination
-        rideData.postValue(rideData.value!!.copy(currentStage = currentStage))
+        if (!hasRideStarted) {
+            hasRideStarted = true
+            getSomeDistance()
+        }
+    }
+
+    private fun getSomeDistance() {
+        val currentDistance = rideData.value!!.distanceToDestination - 5
+        rideData.postValue(rideData.value!!.copy(distanceToDestination = currentDistance))
+        Handler().postDelayed({
+            getSomeDistance()
+        }, DISTANCE_DELTA)
     }
 
     override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -151,7 +163,7 @@ data class TriviaState(
 )
 
 data class RideState(
-    val currentStage: Int = 1,
+    val currentStage: Int = 0,
     val rideDistance: Int = 50,
     val distanceToDestination: Int = 22
 )
