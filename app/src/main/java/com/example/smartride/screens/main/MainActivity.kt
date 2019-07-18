@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity(), IToolBar, IBottomNavigation, ValueEven
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         if (savedInstanceState == null) {
-            bottomNavigation.seteSelectedTab(BottomNavigation.Tab.RIDE)
+            bottomNavigation.setSelectedTab(BottomNavigation.Tab.RIDE)
         }
 
         val viewModel = ViewModelProviders.of(this, TriviaViewModelFactory()).get(TriviaViewModel::class.java)
@@ -68,6 +68,10 @@ class MainActivity : AppCompatActivity(), IToolBar, IBottomNavigation, ValueEven
 
     override fun onToolBarBackPress() {
         onBackPressed()
+    }
+
+    override fun onUserScorePress() {
+        bottomNavigation.setSelectedTab(BottomNavigation.Tab.WALLET)
     }
 
     override fun onLeaderBoardClicked() {

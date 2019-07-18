@@ -95,7 +95,7 @@ class BottomNavigation @JvmOverloads constructor(
 //        rideIconBg.startAnimation(liveRideAnimation)
     }
 
-    fun seteSelectedTab(tab: Tab) {
+    fun setSelectedTab(tab: Tab) {
         chooseTab(tab)
     }
 

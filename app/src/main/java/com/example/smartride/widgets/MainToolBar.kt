@@ -51,6 +51,12 @@ class MainToolBar : AppBarLayout {
             }
         }
 
+        userScoreContainer.setOnClickListener {
+            (context as? IToolBar)?.let {
+                it.onUserScorePress()
+            }
+        }
+
         val disposable = MainActivity.userScore.subscribe({
             userScore.text = it.toString()
         },{
