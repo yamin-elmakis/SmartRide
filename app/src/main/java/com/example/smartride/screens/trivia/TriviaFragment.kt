@@ -48,7 +48,6 @@ class TriviaFragment : BaseFragment() {
             EasyLog.e("triviaPlus")
         }
         triviaQuestionContainer1.setOnClickListener {
-            EasyLog.e("triviaPlus")
             triviaVM.answerClicked(0)
         }
         triviaQuestionContainer2.setOnClickListener {
@@ -73,6 +72,7 @@ class TriviaFragment : BaseFragment() {
                 triviaPlus.isEnabled = it
         })
         state.changed(lastState, { question }, action = {
+            EasyLog.e("Q")
             triviaQuestion.text = it.question
             bindAnswer(triviaQuestionContainer1, triviaQuestion1, triviaIcon1, it.answers[0])
             bindAnswer(triviaQuestionContainer2, triviaQuestion2, triviaIcon2, it.answers[1])
