@@ -101,6 +101,7 @@ class MainActivity : AppCompatActivity(), IToolBar, IBottomNavigation, ValueEven
     override fun onDataChange(dataSnapshot: DataSnapshot) {
         try {
             userScore = dataSnapshot.getValue(Int::class.java) ?: 0
+            mainToolbar.updateUserScore(userScore)
         } catch (e: Exception) {
             EasyLog.e(e)
         }

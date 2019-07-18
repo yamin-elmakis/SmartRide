@@ -6,9 +6,11 @@ import android.view.MotionEvent
 import android.view.View
 import com.example.smartride.R
 import com.example.smartride.base.IToolBar
+import com.example.smartride.screens.main.MainActivity
 import com.google.android.material.appbar.AppBarLayout
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.toolbar_main.view.*
+import kotlinx.android.synthetic.main.view_user_score.view.*
 
 class MainToolBar : AppBarLayout {
 
@@ -44,6 +46,14 @@ class MainToolBar : AppBarLayout {
             (context as? IToolBar)?.let {
                 it.onToolBarBackPress()
             }
+        }
+
+        userScore.text = MainActivity.userScore.toString()
+    }
+
+    fun updateUserScore(score: Int) {
+        if (isAttachedToWindow) {
+            userScore.text = score.toString()
         }
     }
 

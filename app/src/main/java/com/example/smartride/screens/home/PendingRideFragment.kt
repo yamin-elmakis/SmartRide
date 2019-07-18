@@ -20,6 +20,10 @@ class PendingRideFragment : BaseFragment(), TimeCounterView.TimerCallbacks, Valu
     private var animator: ValueAnimator? = null
     private var timestampReference: DatabaseReference? = null
 
+    companion object {
+        private var timestampMillis: Long? = null
+    }
+
     override fun displayToolBar() = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -31,9 +35,14 @@ class PendingRideFragment : BaseFragment(), TimeCounterView.TimerCallbacks, Valu
 
         timestampReference = FirebaseDatabase.getInstance().getReference("nextTaxi/timestamp")
         timestampReference?.addValueEventListener(this)
+
+        timestampMillis?.let {
+            startTimer(it)
+        }
     }
 
     private fun startTimer(millis: Long) {
+
         val duration = millis - System.currentTimeMillis()
 
         pendingTimer.setTime(millis)
@@ -106,9 +115,9 @@ class PendingRideFragment : BaseFragment(), TimeCounterView.TimerCallbacks, Valu
 
     override fun onDataChange(dataSnapshot: DataSnapshot) {
         try {
-            val timestamp = dataSnapshot.getValue(String::class.java)
-            val millis = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(timestamp).time
-            startTimer(millis)
+            val timestamp = dataSnapshot.getValue(String::class.java)!!
+            timestampMillis = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(timestamp).time
+            startTimer(timestampMillis!!)
         } catch (e: Exception) {
             EasyLog.e(e)
         }
