@@ -29,5 +29,4 @@ class FlipTextView @JvmOverloads constructor(
                     .start()
             }.start()
     }
-
 }

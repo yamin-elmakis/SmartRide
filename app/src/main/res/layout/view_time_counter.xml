@@ -61,7 +61,8 @@
             app:layout_constraintTop_toTopOf="@id/guidelineNumbers"
             style="@style/CounterText"
             android:text="0"/>
-    <com.example.smartride.widgets.FlipTextView
+
+    <com.example.smartride.widgets.FlipTextSwitcher
             android:id="@+id/counterSecUnits"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -64,9 +64,8 @@ class TimeCounterView @JvmOverloads constructor(
                         counterSecDozens.animateSetText(it)
                     })
                     newTimeData.changed(timeData, { secondUnits }, action = {
-                        counterSecUnits.animateSetText(it)
+                        counterSecUnits.setText(it)
                     })
-
 
                     timeData = newTimeData
                 }
