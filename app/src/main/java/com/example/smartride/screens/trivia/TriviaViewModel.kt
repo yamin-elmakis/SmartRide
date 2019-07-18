@@ -89,14 +89,16 @@ class TriviaViewModel : ViewModel(), ValueEventListener {
 
                 dataSnapshot.child("answers").children.forEachIndexed { _, dataSnapshot ->
                     val answer = dataSnapshot.child("a").value as String
-                    val isCorrect = dataSnapshot.child("isCorrect").value as Boolean
+                    val isCorrect = dataSnapshot.child("isCorrect").value as? Boolean ?: false
 
                     answers.add(TriviaModel.Answer(answer, isCorrect))
                 }
+                EasyLog.e("answers: ${answers.toString()}")
                 questions.add(TriviaModel.Question((index + 1), question, false, answers))
             }
             EasyLog.d("Ques Final List: $questions")
         } catch (e: Exception) {
+            EasyLog.e(e)
         }
     }
 
