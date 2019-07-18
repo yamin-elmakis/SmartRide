@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.smartride.R
@@ -47,16 +49,16 @@ class TriviaFragment : BaseFragment() {
         }
         triviaQuestionContainer1.setOnClickListener {
             EasyLog.e("triviaPlus")
-            triviaVM.answerClicked(1)
+            triviaVM.answerClicked(0)
         }
         triviaQuestionContainer2.setOnClickListener {
-            triviaVM.answerClicked(2)
+            triviaVM.answerClicked(1)
         }
         triviaQuestionContainer3.setOnClickListener {
-            triviaVM.answerClicked(3)
+            triviaVM.answerClicked(2)
         }
         triviaQuestionContainer4.setOnClickListener {
-            triviaVM.answerClicked(4)
+            triviaVM.answerClicked(3)
         }
 
         triviaVM.updateNextQuestion()
@@ -72,21 +74,46 @@ class TriviaFragment : BaseFragment() {
         })
         state.changed(lastState, { question }, action = {
             triviaQuestion.text = it.question
-            triviaQuestion1.text = it.answers[1].answer
-            triviaQuestion2.text = it.answers[2].answer
-            triviaQuestion3.text = it.answers[3].answer
-            triviaQuestion4.text = it.answers[4].answer
+            bindAnswer(triviaQuestionContainer1, triviaQuestion1, triviaIcon1, it.answers[0])
+            bindAnswer(triviaQuestionContainer2, triviaQuestion2, triviaIcon2, it.answers[1])
+            bindAnswer(triviaQuestionContainer3, triviaQuestion3, triviaIcon3, it.answers[2])
+            bindAnswer(triviaQuestionContainer4, triviaQuestion4, triviaIcon4, it.answers[3])
         })
         lastState = state
     }
 
-    fun bindAnswer(container:ConstraintLayout, text:TextView, answer: TriviaModel.Answer) {
+    private fun bindAnswer(
+        container:ConstraintLayout,
+        text:TextView,
+        icon:ImageView,
+        answer: TriviaModel.Answer
+    ) {
         text.text = answer.answer
         when(answer.state){
-            TriviaModel.State.ERROR -> TODO()
-            TriviaModel.State.RIGHT -> TODO()
-            TriviaModel.State.IDEL -> TODO()
-            TriviaModel.State.DISABLED -> TODO()
+            TriviaModel.State.ERROR -> {
+                text.setTextColor(ContextCompat.getColor(text.context, R.color._white))
+                icon.background = ContextCompat.getDrawable(container.context, R.drawable.ic_trivia_error)
+                container.setBackgroundResource(R.drawable.rounded_red)
+                container.isEnabled = false
+            }
+            TriviaModel.State.RIGHT -> {
+                text.setTextColor(ContextCompat.getColor(text.context, R.color._white))
+                icon.background = ContextCompat.getDrawable(container.context, R.drawable.ic_trivia_v)
+                container.setBackgroundResource(R.drawable.rounded_green)
+                container.isEnabled = false
+            }
+            TriviaModel.State.IDEL -> {
+                text.setTextColor(ContextCompat.getColor(text.context, R.color.colorAccent))
+                icon.background = null
+                container.setBackgroundResource(R.drawable.rounded_white)
+                container.isEnabled = true
+            }
+            TriviaModel.State.DISABLED -> {
+                text.setTextColor(ContextCompat.getColor(text.context, R.color.blue_grey_100))
+                icon.background = null
+                container.setBackgroundResource(R.drawable.rounded_white)
+                container.isEnabled = false
+            }
         }
     }
 }

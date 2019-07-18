@@ -47,6 +47,7 @@
             android:layout_marginEnd="@dimen/trivia_margin_2"
             android:layout_marginTop="4dp"
             android:textSize="20sp"
+            android:textColor="@color/colorAccent"
             tools:text="In which California city can you find the Golden Gate Bridge?"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -154,22 +155,31 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/trivia_margin_2"
             android:layout_marginStart="@dimen/trivia_margin_1"
-            android:layout_marginEnd="@dimen/trivia_margin_1"
-            android:background="@drawable/rounded_background"
-            android:backgroundTint="@color/_white">
+            tools:background="@drawable/rounded_background"
+            android:layout_marginEnd="@dimen/trivia_margin_1">
 
         <TextView
                 android:id="@+id/triviaQuestion1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="start"
-                android:padding="@dimen/trivia_margin_question"
+                android:layout_margin="@dimen/trivia_margin_question"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/triviaIcon1"
                 app:layout_constraintStart_toStartOf="parent"
                 android:textColor="@color/colorAccent"
                 tools:text="Sacramento"/>
+
+        <ImageView
+                android:id="@+id/triviaIcon1"
+                android:layout_width="32dp"
+                android:layout_margin="@dimen/trivia_margin_question"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:src="@drawable/ic_trivia_error"
+                android:layout_height="32dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -182,9 +192,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/trivia_margin_question_2"
             android:layout_marginStart="@dimen/trivia_margin_1"
-            android:layout_marginEnd="@dimen/trivia_margin_1"
-            android:background="@drawable/rounded_background"
-            android:backgroundTint="@color/_white">
+            android:layout_marginEnd="@dimen/trivia_margin_1" >
 
         <TextView
                 android:id="@+id/triviaQuestion2"
@@ -194,10 +202,20 @@
                 android:padding="@dimen/trivia_margin_question"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/triviaIcon2"
                 app:layout_constraintStart_toStartOf="parent"
                 android:textColor="@color/colorAccent"
                 tools:text="Sacramento"/>
+
+        <ImageView
+                android:id="@+id/triviaIcon2"
+                android:layout_width="32dp"
+                android:layout_margin="@dimen/trivia_margin_question"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:src="@drawable/ic_trivia_error"
+                android:layout_height="32dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -210,9 +228,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/trivia_margin_question_2"
             android:layout_marginStart="@dimen/trivia_margin_1"
-            android:layout_marginEnd="@dimen/trivia_margin_1"
-            android:background="@drawable/rounded_background"
-            android:backgroundTint="@color/_white">
+            android:layout_marginEnd="@dimen/trivia_margin_1" >
 
         <TextView
                 android:id="@+id/triviaQuestion3"
@@ -222,10 +238,20 @@
                 android:padding="@dimen/trivia_margin_question"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/triviaIcon3"
                 app:layout_constraintStart_toStartOf="parent"
                 android:textColor="@color/colorAccent"
                 tools:text="Sacramento"/>
+
+        <ImageView
+                android:id="@+id/triviaIcon3"
+                android:layout_width="32dp"
+                android:layout_margin="@dimen/trivia_margin_question"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:src="@drawable/ic_trivia_error"
+                android:layout_height="32dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -238,9 +264,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/trivia_margin_question_2"
             android:layout_marginStart="@dimen/trivia_margin_1"
-            android:layout_marginEnd="@dimen/trivia_margin_1"
-            android:background="@drawable/rounded_background"
-            android:backgroundTint="@color/_white">
+            android:layout_marginEnd="@dimen/trivia_margin_1" >
 
         <TextView
                 android:id="@+id/triviaQuestion4"
@@ -250,10 +274,20 @@
                 android:padding="@dimen/trivia_margin_question"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/triviaIcon4"
                 app:layout_constraintStart_toStartOf="parent"
                 android:textColor="@color/colorAccent"
                 tools:text="Sacramento"/>
+
+        <ImageView
+                android:id="@+id/triviaIcon4"
+                android:layout_width="32dp"
+                android:layout_margin="@dimen/trivia_margin_question"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:src="@drawable/ic_trivia_error"
+                android:layout_height="32dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

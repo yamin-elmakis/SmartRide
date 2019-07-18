@@ -11,8 +11,8 @@ class TriviaViewModel : ViewModel() {
     val questionData: MutableLiveData<TriviaState> = MutableLiveData()
 
     init {
-        notes.add(TriviaModel.Question("why", listOf(
-            TriviaModel.Answer("1"),
+        notes.add(TriviaModel.Question("why som  log sdjh ass qie sdfjh thisd jsdhf hoew will be 2 lines", listOf(
+            TriviaModel.Answer("1 habd sdhfj kjhsd kjhfc kjsdh ksfd f jkdf kdf  dkf j dkf jh dkf jdf df df d f"),
             TriviaModel.Answer("2"),
             TriviaModel.Answer("3", isTheRightOne = true),
             TriviaModel.Answer("4"))))
@@ -42,7 +42,7 @@ class TriviaViewModel : ViewModel() {
             curQuestion.answers[position].state = TriviaModel.State.ERROR
         }
         val newState = questionData.value?.copy(question = curQuestion) ?: TriviaState(curQuestion)
-        questionData.postValue(newState.copy(hasHalf = false))
+        questionData.postValue(newState)
     }
 }
 
