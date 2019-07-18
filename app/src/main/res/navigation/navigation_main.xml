@@ -26,7 +26,8 @@
     <fragment android:id="@+id/gamePreviewFragment"
               android:name="com.example.smartride.screens.live.GamePreviewFragment"
               android:label="GamePreviewFragment">
-        <action android:id="@+id/action_gamePreviewFragment_to_triviaFragment" app:destination="@id/triviaFragment"/>
+        <action android:id="@+id/action_gamePreviewFragment_to_triviaFragment" app:destination="@id/triviaFragment"
+                app:popUpTo="@+id/stagesFragment"/>
     </fragment>
     <fragment android:id="@+id/triviaFragment" android:name="com.example.smartride.screens.trivia.TriviaFragment"
               android:label="TriviaFragment"/>
