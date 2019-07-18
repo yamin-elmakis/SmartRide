@@ -75,7 +75,7 @@ class TriviaViewModel : ViewModel(), ValueEventListener {
             curQuestion.answers[position].state = TriviaModel.State.ERROR
         }
         val newState = questionData.value?.copy(question = curQuestion) ?: TriviaState(curQuestion)
-        questionData.postValue(newState.copy(hasHalf = false))
+        questionData.postValue(newState)
     }
 }
 
