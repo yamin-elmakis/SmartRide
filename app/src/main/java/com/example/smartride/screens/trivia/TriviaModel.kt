@@ -2,9 +2,18 @@ package com.example.smartride.screens.trivia
 
 class TriviaModel {
     data class Question(
-        val question: String,
+        val questionNumber: Int,
+        val questionText: String,
+        val userAnswered: Boolean = false,
         val answers :List<Answer> = listOf()
-    )
+    ) {
+        fun reset(){
+            answers.forEach {
+                it.state = State.IDEL
+            }
+        }
+
+    }
 
     data class Answer(
         val answer: String = "",

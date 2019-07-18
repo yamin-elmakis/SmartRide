@@ -87,8 +87,10 @@ class GamePreviewFragment : BaseFragment() {
             ?.scaleY(2f)
             ?.alpha(0f)
             ?.withEndAction {
-                val navController = NavHostFragment.findNavController(this)
-                navController.navigate(R.id.action_gamePreviewFragment_to_triviaFragment)
+                previewStage?.let {
+                    val navController = NavHostFragment.findNavController(this)
+                    navController.navigate(R.id.action_gamePreviewFragment_to_triviaFragment)
+                }
             }
     }
 }
