@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="LeaderAvatar">
+        <attr name="isTop" format="boolean" />
+        <attr name="isMe" format="boolean" />
+        <attr name="useLargeIcon" format="boolean" />
+    </declare-styleable>
+
+</resources>
