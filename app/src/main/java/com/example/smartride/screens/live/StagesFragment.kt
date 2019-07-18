@@ -32,28 +32,6 @@ class StagesFragment : BaseFragment() {
         triviaVM = ViewModelProviders.of(requireActivity(), TriviaViewModelFactory()).get(TriviaViewModel::class.java)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        val viewModel = ViewModelProviders.of(requireActivity(), TriviaViewModelFactory()).get(TriviaViewModel::class.java)
-        viewModel.rideData.observe(this, Observer {
-
-            EasyLog.d("Current Stage: ${it.currentStage}")
-
-            when (it.currentStage) {
-                0 -> setSnakeAnimation(0f, 0.01f)
-                1 -> setSnakeAnimation(0f, 0.06f)
-                2 -> setSnakeAnimation(0.06f, 0.1f)
-                3 -> setSnakeAnimation(0.1f, 0.13f)
-                4 -> setSnakeAnimation(0.13f, 0.17f)
-                5 -> setSnakeAnimation(0.17f, 0.20f)
-                6 -> setSnakeAnimation(0.20f, 0.23f)
-                7 -> setSnakeAnimation(0.23f, 0.27f)
-                8 -> setSnakeAnimation(0.27f, 0.31f)
-            }
-        })
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_stages, container, false)
     }
@@ -75,6 +53,21 @@ class StagesFragment : BaseFragment() {
         state.changed(lastState, { distanceToDestination }, action = {
             stagesDistanceLeft.animateSetText(it.toString())
         })
+        state.changed(lastState, { currentStage }, action = {
+            when (it) {
+                0 -> setSnakeAnimation(0f, 0.01f)
+                1 -> setSnakeAnimation(0f, 0.06f)
+                2 -> setSnakeAnimation(0.06f, 0.1f)
+                3 -> setSnakeAnimation(0.1f, 0.13f)
+                4 -> setSnakeAnimation(0.13f, 0.17f)
+                5 -> setSnakeAnimation(0.17f, 0.20f)
+                6 -> setSnakeAnimation(0.20f, 0.23f)
+                7 -> setSnakeAnimation(0.23f, 0.27f)
+                8 -> setSnakeAnimation(0.27f, 0.31f)
+            }
+        })
+
+        lastState = state
     }
 
     private fun setSnakeAnimation(from: Float, to: Float) {
