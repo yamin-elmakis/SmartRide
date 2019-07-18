@@ -17,7 +17,7 @@
                 android:id="@+id/liveDistanceLeft"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="10dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -53,7 +53,6 @@
                 android:id="@+id/liveLottieRoute"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:layout_marginTop="10dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/live_from"/>
@@ -91,7 +90,8 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:src="@drawable/ic_info"/>
+                    android:tint="@color/colorPrimary"
+                    android:src="@drawable/ic_leader_board"/>
 
             <TextView
                     android:id="@+id/live_multi_title"
@@ -129,7 +129,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
                 android:textColor="@color/blue_grey_100"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:textAllCaps="true"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/live_multi_container"

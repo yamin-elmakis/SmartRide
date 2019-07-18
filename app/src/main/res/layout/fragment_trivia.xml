@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:background="@color/grey_50"
+        tools:background="@color/red"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <View
+            android:id="@+id/trivia_question_back"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="@dimen/trivia_margin_1"
+            android:layout_marginEnd="@dimen/trivia_margin_1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/trivia_question_holder"
+            android:backgroundTint="@color/_white"
+            android:background="@drawable/rounded_background"/>
+
+    <TextView
+            android:id="@+id/triviaQuestionNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="18dp"
+            android:textStyle="bold"
+            android:textSize="40sp"
+            android:padding="4dp"
+            android:background="@drawable/rounded_background"
+            android:text="Q1"/>
+
+    <TextView
+            android:id="@+id/triviaQuestion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/triviaQuestionNumber"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="@dimen/trivia_margin_2"
+            android:layout_marginEnd="@dimen/trivia_margin_2"
+            android:layout_marginTop="4dp"
+            android:textSize="20sp"
+            tools:text="In which California city can you find the Golden Gate Bridge?"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/triviaHalf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorAccent"
+            android:background="@drawable/rounded_background"
+            android:layout_marginEnd="@dimen/trivia_margin_2"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:stateListAnimator="@animator/raise"
+            app:layout_constraintTop_toBottomOf="@id/triviaQuestion">
+
+        <ImageView
+                android:id="@+id/trivia_half_icon"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:src="@drawable/ic_50_50"/>
+
+        <TextView
+                android:id="@+id/trivia_half_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                app:layout_constraintStart_toEndOf="@id/trivia_half_icon"
+                app:layout_constraintTop_toTopOf="@id/trivia_half_icon"
+                app:layout_constraintBottom_toBottomOf="@id/trivia_half_icon"
+                android:textColor="@color/_white"
+                android:text="50/50"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Placeholder
+            android:id="@+id/trivia_question_holder"
+            android:layout_width="1px"
+            android:layout_height="15dp"
+            app:layout_constraintEnd_toEndOf="@id/triviaHalf"
+            app:layout_constraintTop_toBottomOf="@id/triviaHalf"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/triviaPlus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorAccent"
+            android:background="@drawable/rounded_background"
+            android:layout_marginEnd="@dimen/trivia_margin_1"
+            app:layout_constraintEnd_toStartOf="@id/triviaHalf"
+            android:stateListAnimator="@animator/raise"
+            app:layout_constraintTop_toTopOf="@id/triviaHalf">
+
+        <ImageView
+                android:id="@+id/trivia_plus_icon"
+                android:layout_width="20dp"
+                android:layout_height="16dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:src="@drawable/ic_plus_five"/>
+
+        <TextView
+                android:id="@+id/trivia_plus_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:paddingStart="10dp"
+                android:paddingEnd="12dp"
+                app:layout_constraintStart_toEndOf="@id/trivia_plus_icon"
+                app:layout_constraintTop_toTopOf="@id/trivia_plus_icon"
+                app:layout_constraintBottom_toBottomOf="@id/trivia_plus_icon"
+                android:textColor="@color/_white"
+                android:text="+5 sec"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+            android:id="@+id/trivia_need_help"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintTop_toTopOf="@id/triviaHalf"
+            app:layout_constraintBottom_toBottomOf="@id/triviaHalf"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="@dimen/trivia_margin_2"
+            android:text="Need help?"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/triviaQuestionContainer1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/trivia_question_holder"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/trivia_margin_2"
+            android:layout_marginStart="@dimen/trivia_margin_1"
+            android:layout_marginEnd="@dimen/trivia_margin_1"
+            android:background="@drawable/rounded_background"
+            android:backgroundTint="@color/_white">
+
+        <TextView
+                android:id="@+id/triviaQuestion1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:padding="@dimen/trivia_margin_question"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:textColor="@color/colorAccent"
+                tools:text="Sacramento"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/triviaQuestionContainer2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/triviaQuestionContainer1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/trivia_margin_question_2"
+            android:layout_marginStart="@dimen/trivia_margin_1"
+            android:layout_marginEnd="@dimen/trivia_margin_1"
+            android:background="@drawable/rounded_background"
+            android:backgroundTint="@color/_white">
+
+        <TextView
+                android:id="@+id/triviaQuestion2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:padding="@dimen/trivia_margin_question"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:textColor="@color/colorAccent"
+                tools:text="Sacramento"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/triviaQuestionContainer3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/triviaQuestionContainer2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/trivia_margin_question_2"
+            android:layout_marginStart="@dimen/trivia_margin_1"
+            android:layout_marginEnd="@dimen/trivia_margin_1"
+            android:background="@drawable/rounded_background"
+            android:backgroundTint="@color/_white">
+
+        <TextView
+                android:id="@+id/triviaQuestion3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:padding="@dimen/trivia_margin_question"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:textColor="@color/colorAccent"
+                tools:text="Sacramento"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/triviaQuestionContainer4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/triviaQuestionContainer3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/trivia_margin_question_2"
+            android:layout_marginStart="@dimen/trivia_margin_1"
+            android:layout_marginEnd="@dimen/trivia_margin_1"
+            android:background="@drawable/rounded_background"
+            android:backgroundTint="@color/_white">
+
+        <TextView
+                android:id="@+id/triviaQuestion4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:padding="@dimen/trivia_margin_question"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:textColor="@color/colorAccent"
+                tools:text="Sacramento"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/triviaLottieTimer"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginStart="@dimen/trivia_margin_1"
+            android:layout_marginEnd="@dimen/trivia_margin_1"
+            android:layout_marginBottom="@dimen/trivia_margin_1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
