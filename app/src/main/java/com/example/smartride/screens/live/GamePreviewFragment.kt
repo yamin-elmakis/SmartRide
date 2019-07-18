@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.fragment_game_preview.*
 class GamePreviewFragment : BaseFragment() {
 
     companion object {
-        const val DELAY = 1000L
+        const val DELAY = 800L
     }
 
     override fun toolBarMode() = MainToolBar.ToolBarMode.BACK
@@ -31,7 +31,7 @@ class GamePreviewFragment : BaseFragment() {
         previewStage?.text = stage
         previewStage?.animate()
             ?.setDuration(300)
-            ?.setStartDelay(DELAY)
+            ?.setStartDelay(700)
             ?.scaleX(2f)
             ?.scaleY(2f)
             ?.alpha(0f)

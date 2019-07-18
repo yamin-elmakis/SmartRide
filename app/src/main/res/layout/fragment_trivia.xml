@@ -53,12 +53,13 @@
             android:id="@+id/triviaHalf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorAccent"
-            android:background="@drawable/rounded_background"
+            android:background="@drawable/selector_trivia_helper"
             android:layout_marginEnd="@dimen/trivia_margin_2"
             android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             android:stateListAnimator="@animator/raise"
+            android:clickable="true"
+            android:focusable="true"
             app:layout_constraintTop_toBottomOf="@id/triviaQuestion">
 
         <ImageView
@@ -98,16 +99,17 @@
             android:id="@+id/triviaPlus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorAccent"
-            android:background="@drawable/rounded_background"
+            android:background="@drawable/selector_trivia_helper"
             android:layout_marginEnd="@dimen/trivia_margin_1"
             app:layout_constraintEnd_toStartOf="@id/triviaHalf"
             android:stateListAnimator="@animator/raise"
-            app:layout_constraintTop_toTopOf="@id/triviaHalf">
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintTop_toTopOf="@id/triviaHalf" >
 
         <ImageView
                 android:id="@+id/trivia_plus_icon"
-                android:layout_width="20dp"
+                android:layout_width="22dp"
                 android:layout_height="16dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
@@ -122,7 +124,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
-                android:paddingStart="10dp"
+                android:paddingStart="8dp"
                 android:paddingEnd="12dp"
                 app:layout_constraintStart_toEndOf="@id/trivia_plus_icon"
                 app:layout_constraintTop_toTopOf="@id/trivia_plus_icon"
