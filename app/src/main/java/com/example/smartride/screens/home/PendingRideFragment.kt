@@ -11,6 +11,7 @@ import com.example.smartride.base.BaseFragment
 import com.example.smartride.base.IBottomNavigation
 import com.example.smartride.screens.main.MainActivity
 import com.example.smartride.widgets.TimeCounterView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.view_user_score.*
@@ -35,6 +36,8 @@ class PendingRideFragment : BaseFragment(), TimeCounterView.TimerCallbacks, Valu
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        pendingHi.text = "Hey " + (FirebaseAuth.getInstance().currentUser?.displayName ?: "")
 
         timestampReference = FirebaseDatabase.getInstance().getReference("nextTaxi/timestamp")
         timestampReference?.addValueEventListener(this)
