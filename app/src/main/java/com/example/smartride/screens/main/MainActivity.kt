@@ -1,5 +1,6 @@
 package com.example.smartride.screens.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.NavigationRes
@@ -10,10 +11,12 @@ import androidx.navigation.fragment.NavHostFragment
 import com.example.smartride.R
 import com.example.smartride.base.IBottomNavigation
 import com.example.smartride.base.IToolBar
+import com.example.smartride.screens.login.LoginActivity
 import com.example.smartride.screens.trivia.TriviaViewModel
 import com.example.smartride.screens.trivia.TriviaViewModelFactory
 import com.example.smartride.widgets.BottomNavigation
 import com.example.smartride.widgets.MainToolBar
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import io.reactivex.subjects.BehaviorSubject
 import kotlinx.android.synthetic.main.activity_main.*
@@ -34,6 +37,13 @@ class MainActivity : AppCompatActivity(), IToolBar, IBottomNavigation, ValueEven
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        if (FirebaseAuth.getInstance().currentUser == null) {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+            return
+        }
+
         if (savedInstanceState == null) {
             bottomNavigation.setSelectedTab(BottomNavigation.Tab.RIDE)
         }
