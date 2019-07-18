@@ -72,10 +72,10 @@ class TriviaFragment : BaseFragment() {
         })
         state.changed(lastState, { question }, action = {
             triviaQuestion.text = it.question
-            triviaQuestion1.text = it.answers[1].answer
-            triviaQuestion2.text = it.answers[2].answer
-            triviaQuestion3.text = it.answers[3].answer
-            triviaQuestion4.text = it.answers[4].answer
+            triviaQuestion1.text = it.answers[0].answer
+            triviaQuestion2.text = it.answers[1].answer
+            triviaQuestion3.text = it.answers[2].answer
+            triviaQuestion4.text = it.answers[3].answer
         })
         lastState = state
     }

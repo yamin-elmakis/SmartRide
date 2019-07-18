@@ -4,12 +4,15 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.NavigationRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.example.smartride.R
 import com.example.smartride.base.IBottomNavigation
 import com.example.smartride.base.IToolBar
+import com.example.smartride.screens.trivia.TriviaViewModel
+import com.example.smartride.screens.trivia.TriviaViewModelFactory
 import com.example.smartride.widgets.BottomNavigation
 import com.example.smartride.widgets.MainToolBar
 import com.google.firebase.database.*
@@ -32,6 +35,8 @@ class MainActivity : AppCompatActivity(), IToolBar, IBottomNavigation, ValueEven
         if (savedInstanceState == null) {
             bottomNavigation.seteSelectedTab(BottomNavigation.Tab.RIDE)
         }
+
+        val viewModel = ViewModelProviders.of(this, TriviaViewModelFactory()).get(TriviaViewModel::class.java)
 
         timestampReference = FirebaseDatabase.getInstance().getReference("userScore")
         timestampReference?.addValueEventListener(this)
