@@ -78,7 +78,6 @@ class StagesFragment : BaseFragment() {
     }
 
     private fun setSnakeAnimation(from: Float, to: Float) {
-
         animator?.cancel()
         animator?.removeAllUpdateListeners()
 
