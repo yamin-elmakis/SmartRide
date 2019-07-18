@@ -45,25 +45,23 @@ class LeaderBoardFragment : BaseFragment() {
         avatar_15.setData(isTop = false, useLargeAvatar = false, position = 15, user = list[14])
     }
 
-    companion object {
-        private val leaders = listOf(
-            LeaderUser(name = "Sofie", avatar = R.drawable.ic_avatar_leader_1, score = 704),
-            LeaderUser(name = "Harmen", avatar = R.drawable.ic_avatar_leader_2, score = 654),
-            LeaderUser(name = "Emmy", avatar = R.drawable.ic_avatar_leader_emmy, score = 749),
-            LeaderUser(name = "Julian", avatar = R.drawable.ic_avatar_leader_julian, score = 953),
-            LeaderUser(name = "Kwak", avatar = R.drawable.ic_avatar_leader_kwak, score = 812),
-            LeaderUser(name = "Tommi", avatar = R.drawable.ic_avatar_leader_2, score = 102),
-            LeaderUser(name = "Jane", avatar = R.drawable.ic_avatar_leader_1, score = 269),
-            LeaderUser(name = "Will", avatar = R.drawable.ic_avatar_leader_2, score = 675),
-            LeaderUser(name = "Rick", avatar = R.drawable.ic_avatar_leader_2, score = 456),
-            LeaderUser(name = "Morty", avatar = R.drawable.ic_avatar_leader_2, score = 152),
-            LeaderUser(name = "Bruce", avatar = R.drawable.ic_avatar_leader_bruce, score = 847),
-            LeaderUser(name = "Tony", avatar = R.drawable.ic_avatar_leader_2, score = 435),
-            LeaderUser(name = "Peter", avatar = R.drawable.ic_avatar_leader_2, score = 112),
-            LeaderUser(name = "Naomi", avatar = R.drawable.ic_avatar_leader_naomi, score = 353),
-            LeaderUser(isMe = true, name = FirebaseAuth.getInstance().currentUser?.displayName ?: "", avatar = R.drawable.ic_avatar_leader_me, score = MainActivity.userScore)
-        )
-    }
+    private val leaders = listOf(
+        LeaderUser(name = "Sofie", avatar = R.drawable.ic_avatar_leader_1, score = 704),
+        LeaderUser(name = "Harmen", avatar = R.drawable.ic_avatar_leader_2, score = 654),
+        LeaderUser(name = "Emmy", avatar = R.drawable.ic_avatar_leader_emmy, score = 749),
+        LeaderUser(name = "Julian", avatar = R.drawable.ic_avatar_leader_julian, score = 953),
+        LeaderUser(name = "Kwak", avatar = R.drawable.ic_avatar_leader_kwak, score = 812),
+        LeaderUser(name = "Tommi", avatar = R.drawable.ic_avatar_leader_2, score = 102),
+        LeaderUser(name = "Jane", avatar = R.drawable.ic_avatar_leader_1, score = 269),
+        LeaderUser(name = "Will", avatar = R.drawable.ic_avatar_leader_2, score = 675),
+        LeaderUser(name = "Rick", avatar = R.drawable.ic_avatar_leader_2, score = 456),
+        LeaderUser(name = "Morty", avatar = R.drawable.ic_avatar_leader_2, score = 152),
+        LeaderUser(name = "Bruce", avatar = R.drawable.ic_avatar_leader_bruce, score = 847),
+        LeaderUser(name = "Tony", avatar = R.drawable.ic_avatar_leader_2, score = 435),
+        LeaderUser(name = "Peter", avatar = R.drawable.ic_avatar_leader_2, score = 112),
+        LeaderUser(name = "Naomi", avatar = R.drawable.ic_avatar_leader_naomi, score = 353),
+        LeaderUser(isMe = true, name = FirebaseAuth.getInstance().currentUser?.displayName ?: "", avatar = R.drawable.ic_avatar_leader_me, score = MainActivity.userScore.value ?: 0)
+    )
 
     data class LeaderUser(
         val isMe: Boolean = false, val name: String, @DrawableRes val avatar: Int, val score: Int

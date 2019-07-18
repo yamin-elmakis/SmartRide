@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@drawable/selector_bottom_tab"
                 android:gravity="center"
-                android:text="Live Ride"/>
+                android:text="Pending Ride"/>
         </LinearLayout>
 
     </FrameLayout>

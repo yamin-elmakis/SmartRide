@@ -9,6 +9,7 @@ import com.example.smartride.base.IToolBar
 import com.example.smartride.screens.main.MainActivity
 import com.google.android.material.appbar.AppBarLayout
 import com.google.firebase.auth.FirebaseAuth
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.toolbar_main.view.*
 import kotlinx.android.synthetic.main.view_user_score.view.*
 
@@ -19,6 +20,8 @@ class MainToolBar : AppBarLayout {
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
     private var toolBarMode: ToolBarMode? = null
+
+    private val compositeDisposable = CompositeDisposable()
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
@@ -48,7 +51,19 @@ class MainToolBar : AppBarLayout {
             }
         }
 
-        userScore.text = MainActivity.userScore.toString()
+        userScoreContainer.setOnClickListener {
+            (context as? IToolBar)?.let {
+                it.onUserScorePress()
+            }
+        }
+
+        val disposable = MainActivity.userScore.subscribe({
+            userScore.text = it.toString()
+        },{
+
+        })
+
+        compositeDisposable.add(disposable)
     }
 
     fun updateUserScore(score: Int) {
@@ -61,6 +76,8 @@ class MainToolBar : AppBarLayout {
         super.onDetachedFromWindow()
 
         removeAllViews()
+
+
     }
 
     fun setToolBarMode(mode: ToolBarMode) {

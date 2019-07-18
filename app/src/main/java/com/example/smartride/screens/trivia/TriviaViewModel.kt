@@ -3,6 +3,7 @@ package com.example.smartride.screens.trivia
 import android.os.Handler
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.smartride.screens.main.MainActivity
 import com.google.firebase.database.*
 import lib.yamin.easylog.EasyLog
 
@@ -135,7 +136,9 @@ class TriviaViewModel : ViewModel(), ValueEventListener {
     }
 
     private fun onUserAnsweredCorrectly() {
-        EasyLog.e()
+        MainActivity.userScore.value?.let {
+            FirebaseDatabase.getInstance().getReference("userScore").setValue(it + 18)
+        }
     }
 
 }

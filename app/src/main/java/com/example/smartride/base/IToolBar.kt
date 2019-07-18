@@ -7,5 +7,6 @@ interface IToolBar {
     fun toggleToolBar(show: Boolean)
     fun setToolBarMode(toolBarMode: MainToolBar.ToolBarMode)
     fun onToolBarBackPress()
+    fun onUserScorePress()
 
 }

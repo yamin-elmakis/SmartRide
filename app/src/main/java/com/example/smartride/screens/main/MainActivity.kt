@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI
 import com.example.smartride.R
 import com.example.smartride.base.IBottomNavigation
 import com.example.smartride.base.IToolBar
@@ -16,6 +15,7 @@ import com.example.smartride.screens.trivia.TriviaViewModelFactory
 import com.example.smartride.widgets.BottomNavigation
 import com.example.smartride.widgets.MainToolBar
 import com.google.firebase.database.*
+import io.reactivex.subjects.BehaviorSubject
 import kotlinx.android.synthetic.main.activity_main.*
 import lib.yamin.easylog.EasyLog
 
@@ -26,14 +26,16 @@ class MainActivity : AppCompatActivity(), IToolBar, IBottomNavigation, ValueEven
     companion object {
         private const val KEY_SELECTED_GRAPH = "key_selected_graph"
 
-        var userScore: Int = 0
+        var userScore = BehaviorSubject.create<Int>().apply {
+            onNext(0)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         if (savedInstanceState == null) {
-            bottomNavigation.seteSelectedTab(BottomNavigation.Tab.RIDE)
+            bottomNavigation.setSelectedTab(BottomNavigation.Tab.RIDE)
         }
 
         val viewModel = ViewModelProviders.of(this, TriviaViewModelFactory()).get(TriviaViewModel::class.java)
@@ -47,14 +49,6 @@ class MainActivity : AppCompatActivity(), IToolBar, IBottomNavigation, ValueEven
 
         timestampReference?.removeEventListener(this)
     }
-
-//    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
-//        super.onRestoreInstanceState(savedInstanceState)
-//        // Now that BottomNavigationBar has restored its instance state
-//        // and its selectedItemId, we can proceed with setting up the
-//        // BottomNavigationBar with Navigation
-//        setupBottomNavigationBar()
-//    }
 
     override fun onSupportNavigateUp(): Boolean {
         return findNavController(R.id.nav_host_fragment).navigateUp()
@@ -74,6 +68,10 @@ class MainActivity : AppCompatActivity(), IToolBar, IBottomNavigation, ValueEven
 
     override fun onToolBarBackPress() {
         onBackPressed()
+    }
+
+    override fun onUserScorePress() {
+        bottomNavigation.setSelectedTab(BottomNavigation.Tab.WALLET)
     }
 
     override fun onLeaderBoardClicked() {
@@ -104,8 +102,7 @@ class MainActivity : AppCompatActivity(), IToolBar, IBottomNavigation, ValueEven
 
     override fun onDataChange(dataSnapshot: DataSnapshot) {
         try {
-            userScore = dataSnapshot.getValue(Int::class.java) ?: 0
-            mainToolbar.updateUserScore(userScore)
+            userScore.onNext(dataSnapshot.getValue(Int::class.java) ?: 0)
         } catch (e: Exception) {
             EasyLog.e(e)
         }
