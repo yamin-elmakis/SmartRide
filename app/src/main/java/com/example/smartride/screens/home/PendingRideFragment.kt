@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.NavHostFragment
 import com.example.smartride.R
 import com.example.smartride.base.BaseFragment
+import com.example.smartride.base.IBottomNavigation
 import com.example.smartride.widgets.TimeCounterView
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -88,12 +89,14 @@ class PendingRideFragment : BaseFragment(), TimeCounterView.TimerCallbacks, Valu
     private fun checkIfDone(time: Long): Boolean {
 
         if (time <= 0) {
+            (activity as? IBottomNavigation)?.setRideLiveState(true)
             val navController = NavHostFragment.findNavController(this)
             navController.navigate(R.id.action_pendingRideFragment_to_liveRideFragment)
             return true
+        } else {
+            (activity as? IBottomNavigation)?.setRideLiveState(false)
+            return false
         }
-
-        return false
     }
 
     override fun onPause() {

@@ -41,6 +41,12 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center_horizontal"/>
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="7.5dp"
+            android:src="@drawable/ic_live_ride_tab"
+            android:layout_gravity="center_horizontal"/>
         <LinearLayout
             android:orientation="vertical"
             android:gravity="center"
@@ -50,6 +56,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"/>
             <TextView
+                android:id="@+id/textRide"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@drawable/selector_bottom_tab"

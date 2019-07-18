@@ -6,4 +6,6 @@ interface IBottomNavigation {
     fun onRideClicked()
     fun onWalletClicked()
 
+    fun setRideLiveState(isLive: Boolean)
+
 }
