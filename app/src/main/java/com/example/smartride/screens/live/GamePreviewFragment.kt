@@ -1,22 +1,36 @@
 package com.example.smartride.screens.live
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.NavHostFragment
 import com.example.smartride.R
 import com.example.smartride.base.BaseFragment
+import com.example.smartride.screens.trivia.RideState
+import com.example.smartride.screens.trivia.TriviaViewModel
+import com.example.smartride.screens.trivia.TriviaViewModelFactory
+import com.example.smartride.utils.changed
 import com.example.smartride.widgets.MainToolBar
 import kotlinx.android.synthetic.main.fragment_game_preview.*
 
 class GamePreviewFragment : BaseFragment() {
 
+    private lateinit var triviaVM: TriviaViewModel
+    var lastState = RideState(-1, -1, 0)
     companion object {
         const val DELAY = 800L
     }
 
     override fun toolBarMode() = MainToolBar.ToolBarMode.BACK
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        triviaVM = ViewModelProviders.of(requireActivity(), TriviaViewModelFactory()).get(TriviaViewModel::class.java)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_game_preview, container, false)
@@ -24,7 +38,15 @@ class GamePreviewFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setStage("Stage 2")
+        triviaVM.rideData.observe(this, Observer { state ->
+            state.changed(lastState, { currentStage }, action = {
+                setStage("Stage ${it + 1}")
+            })
+            state.changed(lastState, { distanceToDestination }, action = {
+                previewDistanceLeft.animateSetText(it.toString())
+            })
+            lastState = state
+        })
     }
 
     private fun setStage(stage: String) {

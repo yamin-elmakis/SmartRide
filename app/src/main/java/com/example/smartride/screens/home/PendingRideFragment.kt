@@ -53,7 +53,6 @@ class PendingRideFragment : BaseFragment(), TimeCounterView.TimerCallbacks, Valu
     }
 
     private fun startTimer(millis: Long) {
-
         val duration = millis - System.currentTimeMillis()
 
         pendingTimer.setTime(millis)

@@ -47,6 +47,7 @@ class StagesFragment : BaseFragment() {
         triviaVM.rideData.observe(this, Observer { state ->
             handleState(state)
         })
+        triviaVM.startNewStage()
     }
 
     private fun handleState(state: RideState) {
@@ -71,7 +72,6 @@ class StagesFragment : BaseFragment() {
     }
 
     private fun setSnakeAnimation(from: Float, to: Float) {
-
         animator?.cancel()
         animator?.removeAllUpdateListeners()
 

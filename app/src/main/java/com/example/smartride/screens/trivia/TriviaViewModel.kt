@@ -10,7 +10,7 @@ import lib.yamin.easylog.EasyLog
 class TriviaViewModel : ViewModel(), ValueEventListener {
 
     companion object{
-        const val DISTANCE_DELTA = 1000L
+        const val DISTANCE_DELTA = 2500L
     }
 
     private var hasRideStarted: Boolean = false
@@ -82,10 +82,10 @@ class TriviaViewModel : ViewModel(), ValueEventListener {
             curQuestion.reset()
 
             currentQuestion = (currentQuestion + 1) % questions.size
-
             if (currentQuestion % 3 == 0) {
                 sendFinishedStage()
             } else {
+
                 updateNextQuestion()
             }
         }, 2000)
@@ -103,6 +103,13 @@ class TriviaViewModel : ViewModel(), ValueEventListener {
         }
     }
 
+    fun startNewStage() {
+        questionData.value?.let {
+            val newState = it.copy(finishedStage = false)
+            questionData.postValue(newState)
+        }
+    }
+
     fun onRideStarted() {
         if (!hasRideStarted) {
             hasRideStarted = true
@@ -112,7 +119,7 @@ class TriviaViewModel : ViewModel(), ValueEventListener {
 
     private fun getSomeDistance() {
         rideData.value?.let {
-            val currentDistance = it.distanceToDestination - 5
+            val currentDistance = it.distanceToDestination - 10
             if (currentDistance > 0) {
                 rideData.postValue(it.copy(distanceToDestination = currentDistance))
                 Handler().postDelayed({
