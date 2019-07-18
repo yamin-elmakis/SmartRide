@@ -8,16 +8,19 @@ import lib.yamin.easylog.EasyLog
 
 class TriviaViewModel : ViewModel(), ValueEventListener {
 
-    var currentQuestion: Int = 0
-    val questions: MutableList<TriviaModel.Question> = mutableListOf()
+    var currentStage = 1
+    private var currentQuestion: Int = 0
+    private val questions: MutableList<TriviaModel.Question> = mutableListOf()
 
     val questionData: MutableLiveData<TriviaState> = MutableLiveData()
+    val rideData: MutableLiveData<RideState> = MutableLiveData()
 
     private var databaseReference: DatabaseReference? = null
 
     init {
         databaseReference = FirebaseDatabase.getInstance().getReference("questions")
         databaseReference?.addValueEventListener(this)
+        rideData.postValue(RideState())
     }
 
     fun updateNextQuestion() {
@@ -75,8 +78,27 @@ class TriviaViewModel : ViewModel(), ValueEventListener {
 
             currentQuestion = (currentQuestion + 1) % questions.size
 
-            updateNextQuestion()
+            EasyLog.e("currentStage: $currentStage:: ${currentStage % 3 == 0}")
+            if (currentQuestion % 3 == 0) {
+                currentStage++
+                sendFinishedStage()
+            } else {
+                updateNextQuestion()
+            }
         }, 2000)
+    }
+
+    private fun sendFinishedStage() {
+        val currentStage = rideData.value!!.currentStage + 1
+        rideData.postValue(rideData.value!!.copy(currentStage = currentStage))
+
+        val newState = questionData.value!!.copy(finishedStage = true)
+        questionData.postValue(newState)
+    }
+
+    fun onRideStarted() {
+        val currentDistance = rideData.value!!.distanceToDestination
+        rideData.postValue(rideData.value!!.copy(currentStage = currentStage))
     }
 
     override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -120,6 +142,15 @@ class TriviaViewModel : ViewModel(), ValueEventListener {
 
 data class TriviaState(
     val question: TriviaModel.Question,
+    val finishedStage: Boolean = false,
     val hasPlusFive: Boolean = true,
     val hasHalf: Boolean = true
 )
+
+data class RideState(
+    val currentStage: Int = 1,
+    val rideDistance: Int = 50,
+    val distanceToDestination: Int = 22
+)
+
+

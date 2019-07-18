@@ -91,6 +91,11 @@ class TriviaFragment : BaseFragment() {
             triviaQuestion.text = it
             startNewTimer()
         })
+        state.changed(lastState, { finishedStage }, action = {
+            if (it) {
+                requireActivity().onBackPressed()
+            }
+        })
         state.question.changed(lastState.question, { questionNumber }, action = {
             triviaQuestionNumber.text = "Q$it"
         })
