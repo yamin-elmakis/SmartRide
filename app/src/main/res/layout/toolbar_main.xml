@@ -30,7 +30,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@id/imageUser"
-            app:layout_constraintEnd_toStartOf="@id/userScore"
+            app:layout_constraintEnd_toStartOf="@id/userScoreContainer"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/textSubTitle"
             android:singleLine="true"
@@ -74,7 +74,7 @@
             android:visibility="gone"/>
 
         <FrameLayout
-            android:id="@+id/userScore"
+            android:id="@+id/userScoreContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
