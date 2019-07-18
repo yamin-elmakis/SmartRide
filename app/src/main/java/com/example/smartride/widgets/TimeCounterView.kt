@@ -46,15 +46,28 @@ class TimeCounterView @JvmOverloads constructor(
                     listener?.onTick(currentMillis)
 
                     val newTimeData = millisUntilFinished.toTimerData()
-                    newTimeData.changed(timeData, { hour }, action = {
-                        counterHr.animateSetText("%02d".format(it))
+                    newTimeData.changed(timeData, { hourDozens }, action = {
+                        counterHrDozens.animateSetText(it)
                     })
-                    newTimeData.changed(timeData, { minute }, action = {
-                        counterMin.animateSetText("%02d".format(it))
+                    newTimeData.changed(timeData, { hourUnits }, action = {
+                        counterHrUnits.animateSetText(it)
                     })
-                    newTimeData.changed(timeData, { second }, action = {
-                        counterSec.animateSetText("%02d".format(it))
+
+                    newTimeData.changed(timeData, { minuteDozens }, action = {
+                        counterMinDozens.animateSetText(it)
                     })
+                    newTimeData.changed(timeData, { minuteUnits }, action = {
+                        counterMinUnits.animateSetText(it)
+                    })
+
+                    newTimeData.changed(timeData, { secondDozens }, action = {
+                        counterSecDozens.animateSetText(it)
+                    })
+                    newTimeData.changed(timeData, { secondUnits }, action = {
+                        counterSecUnits.animateSetText(it)
+                    })
+
+
                     timeData = newTimeData
                 }
             }
@@ -94,7 +107,7 @@ class TimeCounterView @JvmOverloads constructor(
     }
 }
 
-data class TimerData(val hour: Int = 0, val minute: Int = 0, val second: Int = 0)
+data class TimerData(val hourDozens: String = "0", val hourUnits: String = "0", val minuteDozens: String = "0", val minuteUnits: String = "0", val secondDozens: String = "0", val secondUnits: String = "0")
 
 fun Long.toTimerData(): TimerData {
     if (this <= 0) {
@@ -111,9 +124,16 @@ fun Long.toTimerData(): TimerData {
     diff %= minutesInMilli
     val seconds = (diff / secondsInMilli).toInt()
 
+    val h = "%02d".format(hours)
+    val m = "%02d".format(minutes)
+    val s = "%02d".format(seconds)
+
     return TimerData(
-        hour = hours.toInt(),
-        minute = minutes,
-        second = seconds
+        hourDozens = h[0].toString(),
+        hourUnits = h[1].toString(),
+        minuteDozens = m[0].toString(),
+        minuteUnits = m[1].toString(),
+        secondDozens = s[0].toString(),
+        secondUnits = s[1].toString()
     )
 }

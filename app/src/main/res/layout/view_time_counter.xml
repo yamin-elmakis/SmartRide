@@ -28,57 +28,81 @@
             app:layout_constraintGuide_begin="80dp"/>
 
     <com.example.smartride.widgets.FlipTextView
-            android:id="@+id/counterMin"
+            android:id="@+id/counterMinDozens"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/CounterText"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/counterHrDots"
             app:layout_constraintTop_toTopOf="@id/guidelineNumbers"
-            android:text="00"/>
+            android:text="0"/>
+    <com.example.smartride.widgets.FlipTextView
+            android:id="@+id/counterMinUnits"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/CounterText"
+            app:layout_constraintStart_toEndOf="@id/counterMinDozens"
+            app:layout_constraintTop_toTopOf="@id/guidelineNumbers"
+            android:text="0"/>
 
     <TextView
             android:id="@+id/counterMinDots"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/CounterText"
-            app:layout_constraintStart_toEndOf="@+id/counterMin"
+            app:layout_constraintStart_toEndOf="@id/counterMinUnits"
             app:layout_constraintTop_toTopOf="@id/guidelineDots"
             android:text=":"/>
 
     <com.example.smartride.widgets.FlipTextView
-            android:id="@+id/counterSec"
+            android:id="@+id/counterSecDozens"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@+id/counterMinDots"
             app:layout_constraintTop_toTopOf="@id/guidelineNumbers"
             style="@style/CounterText"
-            android:text="00"/>
+            android:text="0"/>
+    <com.example.smartride.widgets.FlipTextView
+            android:id="@+id/counterSecUnits"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/counterSecDozens"
+            app:layout_constraintTop_toTopOf="@id/guidelineNumbers"
+            style="@style/CounterText"
+            android:text="0"/>
+
 
     <TextView
             android:id="@+id/counterHrDots"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/CounterText"
-            app:layout_constraintEnd_toStartOf="@+id/counterMin"
+            app:layout_constraintStart_toEndOf="@id/counterHrUnits"
             app:layout_constraintTop_toTopOf="@id/guidelineDots"
             android:text=":"/>
 
     <com.example.smartride.widgets.FlipTextView
-            android:id="@+id/counterHr"
+            android:id="@+id/counterHrDozens"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toStartOf="@+id/counterHrDots"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/guidelineNumbers"
             style="@style/CounterText"
-            android:text="00"/>
+            android:text="0"/>
+    <com.example.smartride.widgets.FlipTextView
+            android:id="@+id/counterHrUnits"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/counterHrDozens"
+            app:layout_constraintTop_toTopOf="@id/guidelineNumbers"
+            style="@style/CounterText"
+            android:text="0"/>
 
     <TextView
             android:id="@+id/counterHrText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@+id/counterHr"
-            app:layout_constraintStart_toStartOf="@+id/counterHr"
+            app:layout_constraintEnd_toEndOf="@+id/counterHrUnits"
+            app:layout_constraintStart_toStartOf="@+id/counterHrDozens"
             app:layout_constraintTop_toBottomOf="@id/guidelineSubText"
             style="@style/CounterSubText"
             android:textAllCaps="true"
@@ -88,8 +112,8 @@
             android:id="@+id/counterMinText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@+id/counterMin"
-            app:layout_constraintStart_toStartOf="@+id/counterMin"
+            app:layout_constraintEnd_toEndOf="@+id/counterMinUnits"
+            app:layout_constraintStart_toStartOf="@+id/counterMinDozens"
             app:layout_constraintTop_toBottomOf="@id/guidelineSubText"
             style="@style/CounterSubText"
             android:textAllCaps="true"
@@ -99,8 +123,8 @@
             android:id="@+id/counterSecText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@+id/counterSec"
-            app:layout_constraintStart_toStartOf="@+id/counterSec"
+            app:layout_constraintEnd_toEndOf="@+id/counterSecUnits"
+            app:layout_constraintStart_toStartOf="@+id/counterSecDozens"
             app:layout_constraintTop_toBottomOf="@id/guidelineSubText"
             style="@style/CounterSubText"
             android:textAllCaps="true"
