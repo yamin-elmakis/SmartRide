@@ -1,45 +1,15 @@
 package com.example.smartride.screens.trivia
 
+import android.os.Handler
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.database.*
 import lib.yamin.easylog.EasyLog
-import java.lang.Exception
 
 class TriviaViewModel : ViewModel(), ValueEventListener {
 
-    override fun onCancelled(p0: DatabaseError) {
-
-    }
-
-    override fun onDataChange(dataSnapshot: DataSnapshot) {
-        notes.clear()
-        try {
-            dataSnapshot.children.forEachIndexed { index, dataSnapshot ->
-//                EasyLog.d("Ques: $it")
-                val question = dataSnapshot.child("q").value as String
-
-                val answers = mutableListOf<TriviaModel.Answer>()
-
-                dataSnapshot.child("answers").children.forEachIndexed { index, dataSnapshot ->
-                    val answer = dataSnapshot.child("a").value as String
-                    val isCorrect = dataSnapshot.child("isCorrect").value as Boolean
-
-                    answers.add(TriviaModel.Answer(answer, isCorrect))
-                }
-
-                notes.add(TriviaModel.Question(question, answers))
-            }
-
-            EasyLog.d("Ques Final List: $notes")
-
-        } catch (e: Exception) {
-
-        }
-    }
-
     var currentQuestion: Int = 0
-    val notes: MutableList<TriviaModel.Question> = mutableListOf()
+    val questions: MutableList<TriviaModel.Question> = mutableListOf()
 
     val questionData: MutableLiveData<TriviaState> = MutableLiveData()
 
@@ -50,33 +20,102 @@ class TriviaViewModel : ViewModel(), ValueEventListener {
         databaseReference?.addValueEventListener(this)
     }
 
+    fun updateNextQuestion() {
+        if (questions.isEmpty()) {
+            return
+        }
+
+        val nextQuestion = questions[currentQuestion]
+        val newState = questionData.value?.copy(question = nextQuestion) ?: TriviaState(nextQuestion)
+        questionData.postValue(newState)
+    }
+
+    fun answerClicked(position: Int) {
+        val curQuestion = questions[currentQuestion].copy(userAnswered = true)
+        if (curQuestion.answers[position].isTheRightOne) {
+            curQuestion.answers[position].state = TriviaModel.State.RIGHT
+            onUserAnsweredCorrectly()
+        } else {
+            curQuestion.answers[position].state = TriviaModel.State.ERROR
+        }
+        val newState = questionData.value?.copy(question = curQuestion) ?: TriviaState(curQuestion)
+        questionData.postValue(newState)
+        triggerNextQuestion()
+    }
+
+    fun timerEnded() {
+        val userAnswered = questionData.value!!.question.copy(userAnswered = true)
+        val newState = questionData.value!!.copy(question = userAnswered)
+        questionData.postValue(newState)
+        triggerNextQuestion()
+    }
+
+    fun onPlusFiveClicked() {
+        val newState = questionData.value!!.copy(hasPlusFive = false)
+        questionData.postValue(newState)
+    }
+
+    fun onHalfClicked() {
+        val halfAnswers = questionData.value!!.question
+        var count = 0
+        halfAnswers.answers.forEach {
+            if (count < 2 && !it.isTheRightOne) {
+                it.state = TriviaModel.State.DISABLED
+                count++
+            }
+        }
+        val newState = questionData.value!!.copy(question = halfAnswers, hasHalf = false)
+        questionData.postValue(newState)
+    }
+
+    private fun triggerNextQuestion() {
+        Handler().postDelayed({
+            val curQuestion = questions[currentQuestion]
+            curQuestion.reset()
+
+            currentQuestion = (currentQuestion + 1) % questions.size
+
+            updateNextQuestion()
+        }, 2000)
+    }
+
+    override fun onDataChange(dataSnapshot: DataSnapshot) {
+        questions.clear()
+        try {
+            dataSnapshot.children.forEachIndexed { index, dataSnapshot ->
+                //                EasyLog.d("Ques: $it")
+                val question = dataSnapshot.child("q").value as String
+                val answers = mutableListOf<TriviaModel.Answer>()
+
+                dataSnapshot.child("answers").children.forEachIndexed { _, dataSnapshot ->
+                    val answer = dataSnapshot.child("a").value as String
+                    val isCorrect = dataSnapshot.child("isCorrect").value as? Boolean ?: false
+
+                    answers.add(TriviaModel.Answer(answer, isCorrect))
+                }
+                EasyLog.e("answers: ${answers.toString()}")
+                questions.add(TriviaModel.Question((index + 1), question, false, answers))
+            }
+            EasyLog.d("Ques Final List: $questions")
+        } catch (e: Exception) {
+            EasyLog.e(e)
+        }
+    }
+
+    override fun onCancelled(p0: DatabaseError) {
+
+    }
+
     override fun onCleared() {
         super.onCleared()
 
         databaseReference?.removeEventListener(this)
     }
 
-    fun updateNextQuestion() {
-        if (notes.isEmpty()) {
-            return
-        }
-        currentQuestion = (currentQuestion + 1) % notes.size
-
-        val curQuestion = notes[currentQuestion]
-        val newState = questionData.value?.copy(question = curQuestion) ?: TriviaState(curQuestion)
-        questionData.postValue(newState.copy(hasHalf = false))
+    private fun onUserAnsweredCorrectly() {
+        EasyLog.e()
     }
 
-    fun answerClicked(position: Int) {
-        val curQuestion = notes[currentQuestion]
-        if (curQuestion.answers[position].isTheRightOne) {
-            curQuestion.answers[position].state = TriviaModel.State.RIGHT
-        } else {
-            curQuestion.answers[position].state = TriviaModel.State.ERROR
-        }
-        val newState = questionData.value?.copy(question = curQuestion) ?: TriviaState(curQuestion)
-        questionData.postValue(newState)
-    }
 }
 
 data class TriviaState(

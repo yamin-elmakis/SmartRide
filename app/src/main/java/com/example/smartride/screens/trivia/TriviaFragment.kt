@@ -23,7 +23,7 @@ class TriviaFragment : BaseFragment() {
     private lateinit var triviaVM: TriviaViewModel
     override fun toolBarMode() = MainToolBar.ToolBarMode.BACK
     var lastState: TriviaState = TriviaState(
-        question = TriviaModel.Question("", listOf()),
+        question = TriviaModel.Question(-1, "", false, listOf()),
         hasHalf = true, hasPlusFive = true)
 
     override fun onAttach(context: Context) {
@@ -40,12 +40,20 @@ class TriviaFragment : BaseFragment() {
         triviaVM.questionData.observe(this, Observer {
             handleQuestion(it)
         })
-
         triviaHalf.setOnClickListener {
-            EasyLog.e("Half")
+            triviaVM.onHalfClicked()
         }
         triviaPlus.setOnClickListener {
-            EasyLog.e("triviaPlus")
+            var curProgress = triviaLottieTimer.progress
+            EasyLog.e("curProgress: $curProgress")
+            curProgress = if (curProgress < 0.33){
+                0f
+            } else {
+                curProgress - 0.33f
+            }
+            EasyLog.e("updatedProgress: $curProgress")
+            triviaLottieTimer.progress = curProgress
+            triviaVM.onPlusFiveClicked()
         }
         triviaQuestionContainer1.setOnClickListener {
             triviaVM.answerClicked(0)
@@ -60,6 +68,14 @@ class TriviaFragment : BaseFragment() {
             triviaVM.answerClicked(3)
         }
 
+        triviaLottieTimer.imageAssetsFolder = "assets/";
+        triviaLottieTimer.setAnimation("timer_animation.json")
+        triviaLottieTimer.addAnimatorUpdateListener {
+            if (it.animatedFraction >= 1) {
+                triviaVM.timerEnded()
+            }
+        }
+
         triviaVM.updateNextQuestion()
     }
 
@@ -71,15 +87,33 @@ class TriviaFragment : BaseFragment() {
         state.changed(lastState, { hasPlusFive }, action = {
                 triviaPlus.isEnabled = it
         })
-        state.changed(lastState, { question }, action = {
-            EasyLog.e("Q")
-            triviaQuestion.text = it.question
-            bindAnswer(triviaQuestionContainer1, triviaQuestion1, triviaIcon1, it.answers[0])
-            bindAnswer(triviaQuestionContainer2, triviaQuestion2, triviaIcon2, it.answers[1])
-            bindAnswer(triviaQuestionContainer3, triviaQuestion3, triviaIcon3, it.answers[2])
-            bindAnswer(triviaQuestionContainer4, triviaQuestion4, triviaIcon4, it.answers[3])
+        state.question.changed(lastState.question, { questionText }, action = {
+            triviaQuestion.text = it
+            startNewTimer()
+        })
+        state.question.changed(lastState.question, { questionNumber }, action = {
+            triviaQuestionNumber.text = "Q$it"
+        })
+
+        bindAnswer(triviaQuestionContainer1, triviaQuestion1, triviaIcon1, state.question.answers[0])
+        bindAnswer(triviaQuestionContainer2, triviaQuestion2, triviaIcon2, state.question.answers[1])
+        bindAnswer(triviaQuestionContainer3, triviaQuestion3, triviaIcon3, state.question.answers[2])
+        bindAnswer(triviaQuestionContainer4, triviaQuestion4, triviaIcon4, state.question.answers[3])
+
+        state.question.changed(lastState.question, { userAnswered }, action = {
+            if (it) {
+                triviaQuestionContainer1.isEnabled = false
+                triviaQuestionContainer2.isEnabled = false
+                triviaQuestionContainer3.isEnabled = false
+                triviaQuestionContainer4.isEnabled = false
+                triviaLottieTimer.cancelAnimation()
+            }
         })
         lastState = state
+    }
+
+    private fun startNewTimer() {
+        triviaLottieTimer.playAnimation()
     }
 
     private fun bindAnswer(
