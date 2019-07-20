@@ -27,7 +27,7 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_begin="80dp"/>
 
-    <com.example.smartride.widgets.FlipTextView
+    <com.example.smartride.widgets.FlipTextSwitcher
             android:id="@+id/counterMinDozens"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
             app:layout_constraintStart_toEndOf="@id/counterHrDots"
             app:layout_constraintTop_toTopOf="@id/guidelineNumbers"
             android:text="0"/>
-    <com.example.smartride.widgets.FlipTextView
+    <com.example.smartride.widgets.FlipTextSwitcher
             android:id="@+id/counterMinUnits"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
             app:layout_constraintTop_toTopOf="@id/guidelineDots"
             android:text=":"/>
 
-    <com.example.smartride.widgets.FlipTextView
+    <com.example.smartride.widgets.FlipTextSwitcher
             android:id="@+id/counterSecDozens"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
             app:layout_constraintTop_toTopOf="@id/guidelineDots"
             android:text=":"/>
 
-    <com.example.smartride.widgets.FlipTextView
+    <com.example.smartride.widgets.FlipTextSwitcher
             android:id="@+id/counterHrDozens"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
             app:layout_constraintTop_toTopOf="@id/guidelineNumbers"
             style="@style/CounterText"
             android:text="0"/>
-    <com.example.smartride.widgets.FlipTextView
+    <com.example.smartride.widgets.FlipTextSwitcher
             android:id="@+id/counterHrUnits"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -15,11 +15,10 @@ class FlipTextSwitcher @JvmOverloads constructor(
     init {
         setFactory {
             val text = TextView(context)
-            text.setTextColor(ContextCompat.getColor(context, R.color.red))
-            text.textSize = 100f
+            text.setTextAppearance(R.style.CounterText);
             text
         }
-        outAnimation = AnimationUtils.loadAnimation(context, R.anim.text_out)
         inAnimation = AnimationUtils.loadAnimation(context, R.anim.text_in)
+        outAnimation = AnimationUtils.loadAnimation(context, R.anim.text_out)
     }
 }

@@ -87,7 +87,7 @@ class MainToolBar : AppBarLayout {
                     -1
                 }
             EasyLog.e("toUpdate: $updatedTime")
-            updatedTime = System.currentTimeMillis() + updatedTime * 60 * 1000
+            updatedTime = System.currentTimeMillis() + updatedTime * 180 * 1000
             EasyLog.e("updatedTime: $updatedTime")
             triviaVM.updateStartRideTime(updatedTime)
 

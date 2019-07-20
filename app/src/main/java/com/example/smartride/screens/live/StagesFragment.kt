@@ -52,7 +52,7 @@ class StagesFragment : BaseFragment() {
 
     private fun handleState(state: RideState) {
         state.changed(lastState, { distanceToDestination }, action = {
-            stagesDistanceLeft.animateSetText(it.toString())
+            stagesDistanceLeft.setText(it.toString(), true)
         })
         state.changed(lastState, { currentStage }, action = {
             when (it) {

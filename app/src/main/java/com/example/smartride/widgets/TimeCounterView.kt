@@ -47,21 +47,21 @@ class TimeCounterView @JvmOverloads constructor(
 
                     val newTimeData = millisUntilFinished.toTimerData()
                     newTimeData.changed(timeData, { hourDozens }, action = {
-                        counterHrDozens.animateSetText(it)
+                        counterHrDozens.setText(it)
                     })
                     newTimeData.changed(timeData, { hourUnits }, action = {
-                        counterHrUnits.animateSetText(it)
+                        counterHrUnits.setText(it)
                     })
 
                     newTimeData.changed(timeData, { minuteDozens }, action = {
-                        counterMinDozens.animateSetText(it)
+                        counterMinDozens.setText(it)
                     })
                     newTimeData.changed(timeData, { minuteUnits }, action = {
-                        counterMinUnits.animateSetText(it)
+                        counterMinUnits.setText(it)
                     })
 
                     newTimeData.changed(timeData, { secondDozens }, action = {
-                        counterSecDozens.animateSetText(it)
+                        counterSecDozens.setText(it)
                     })
                     newTimeData.changed(timeData, { secondUnits }, action = {
                         counterSecUnits.setText(it)

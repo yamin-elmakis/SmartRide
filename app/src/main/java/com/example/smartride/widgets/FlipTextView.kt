@@ -12,7 +12,15 @@ class FlipTextView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : AppCompatTextView(context, attrs, defStyleAttr) {
 
-    fun animateSetText(newText: String) {
+    fun setText(text: CharSequence, animated: Boolean) {
+        if (animated) {
+            animateSetText(text.toString())
+        } else {
+            setText(text)
+        }
+    }
+
+    private fun animateSetText(newText: String) {
         animate()
             .setDuration(450)
             .rotationX(90f)

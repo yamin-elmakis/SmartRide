@@ -43,7 +43,7 @@ class GamePreviewFragment : BaseFragment() {
                 setStage("Stage ${it + 1}")
             })
             state.changed(lastState, { distanceToDestination }, action = {
-                previewDistanceLeft.animateSetText(it.toString())
+                previewDistanceLeft.setText(it.toString(), true)
             })
             lastState = state
         })

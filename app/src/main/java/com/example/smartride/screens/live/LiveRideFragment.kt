@@ -64,7 +64,7 @@ class LiveRideFragment : BaseFragment() {
     }
 
     private fun setDistanceLeft(distanceLeft: Int) {
-        liveDistanceLeft.animateSetText(distanceLeft.toString())
+        liveDistanceLeft.setText(distanceLeft.toString(), true)
     }
 
     private fun setDistanceAnimation(from: Float, to: Float) {
