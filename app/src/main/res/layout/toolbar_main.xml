@@ -30,7 +30,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@id/imageUser"
-            app:layout_constraintEnd_toStartOf="@id/userScoreContainer"
+            app:layout_constraintEnd_toStartOf="@id/toolbarSwitchTime"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/textSubTitle"
             android:singleLine="true"
@@ -73,17 +73,32 @@
             android:src="@drawable/ic_back"
             android:visibility="gone"/>
 
-        <FrameLayout
-            android:id="@+id/userScoreContainer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginEnd="16dp">
-            <include
+        <TextView
+                android:id="@+id/toolbarSwitchTime"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/userScoreContainer"
+                android:stateListAnimator="@animator/raise"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:layout_marginEnd="4dp"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:text="pending\nlive"/>
+
+        <include
+                android:id="@+id/userScoreContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="16dp"
                 layout="@layout/view_user_score"/>
-        </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -129,11 +129,16 @@ class TriviaViewModel : ViewModel(), ValueEventListener {
         }
     }
 
+    fun updateStartRideTime(startRideTime: Long) {
+        rideData.value?.let {
+            rideData.postValue(it.copy(startRideTime = startRideTime))
+        }
+    }
+
     override fun onDataChange(dataSnapshot: DataSnapshot) {
         questions.clear()
         try {
             dataSnapshot.children.forEachIndexed { index, dataSnapshot ->
-                //                EasyLog.d("Ques: $it")
                 val question = dataSnapshot.child("q").value as String
                 val answers = mutableListOf<TriviaModel.Answer>()
 
@@ -143,10 +148,8 @@ class TriviaViewModel : ViewModel(), ValueEventListener {
 
                     answers.add(TriviaModel.Answer(answer, isCorrect))
                 }
-                EasyLog.e("answers: ${answers.toString()}")
                 questions.add(TriviaModel.Question((index + 1), question, false, answers))
             }
-            EasyLog.d("Ques Final List: $questions")
         } catch (e: Exception) {
             EasyLog.e(e)
         }
@@ -180,7 +183,8 @@ data class TriviaState(
 data class RideState(
     val currentStage: Int = 0,
     val rideDistance: Int = 450,
-    val distanceToDestination: Int = 340
+    val distanceToDestination: Int = 340,
+    val startRideTime: Long = 0
 )
 
 

@@ -73,7 +73,6 @@ class BottomNavigation @JvmOverloads constructor(
     }
 
     fun setRideLiveState(isLive: Boolean) {
-        EasyLog.e("isLive: $isLive")
         if (isLive) {
             tabLive.imageAssetsFolder = "assets/";
             tabLive.setAnimation("live_ride.json")

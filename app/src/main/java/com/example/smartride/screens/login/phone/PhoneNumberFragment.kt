@@ -31,7 +31,7 @@ class PhoneNumberFragment : Fragment() {
 
     companion object {
         private val TAG = PhoneNumberFragment::class.java.simpleName
-        private const val USER_NAME = "Joe"
+        private const val USER_NAME = "Yamin"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

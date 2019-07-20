@@ -21,10 +21,11 @@ import lib.yamin.easylog.EasyLog
 class TriviaFragment : BaseFragment() {
 
     private lateinit var triviaVM: TriviaViewModel
-    override fun toolBarMode() = MainToolBar.ToolBarMode.BACK
     var lastState: TriviaState = TriviaState(
         question = TriviaModel.Question(-1, "", false, listOf()),
         hasHalf = true, hasPlusFive = true)
+
+    override fun toolBarMode() = MainToolBar.ToolBarMode.BACK
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

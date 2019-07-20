@@ -16,7 +16,6 @@ import com.example.smartride.screens.trivia.TriviaViewModel
 import com.example.smartride.screens.trivia.TriviaViewModelFactory
 import com.example.smartride.utils.changed
 import kotlinx.android.synthetic.main.fragment_live_ride.*
-import lib.yamin.easylog.EasyLog
 
 class LiveRideFragment : BaseFragment() {
 
@@ -37,8 +36,6 @@ class LiveRideFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         liveSingleCta.setOnClickListener {
-            EasyLog.e()
-
             val navController = NavHostFragment.findNavController(this)
             navController.navigate(R.id.action_liveRideFragment_to_stagesFragment)
         }
@@ -57,9 +54,6 @@ class LiveRideFragment : BaseFragment() {
         } else state.changed(lastState, { distanceToDestination }, action = {
             setDistanceLeft(it)
 
-            EasyLog.e("last: ${lastState.distanceToDestination}")
-            EasyLog.e("cur: ${state.distanceToDestination}")
-            EasyLog.e("total: ${state.rideDistance}")
             setDistanceAnimation(
                 from = 1 - (lastState.distanceToDestination.toFloat() / state.rideDistance.toFloat()),
                 to = 1 - (state.distanceToDestination.toFloat() / state.rideDistance.toFloat())
@@ -74,7 +68,6 @@ class LiveRideFragment : BaseFragment() {
     }
 
     private fun setDistanceAnimation(from: Float, to: Float) {
-        EasyLog.e("from: $from, to: $to")
         animator?.cancel()
         animator?.removeAllUpdateListeners()
 
