@@ -1,15 +1,22 @@
 package com.example.smartride.screens.home
 
 import android.animation.ValueAnimator
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.NavHostFragment
 import com.example.smartride.R
 import com.example.smartride.base.BaseFragment
 import com.example.smartride.base.IBottomNavigation
 import com.example.smartride.screens.main.MainActivity
+import com.example.smartride.screens.trivia.RideState
+import com.example.smartride.screens.trivia.TriviaViewModel
+import com.example.smartride.screens.trivia.TriviaViewModelFactory
+import com.example.smartride.utils.changed
 import com.example.smartride.widgets.TimeCounterView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -23,12 +30,15 @@ class PendingRideFragment : BaseFragment(), TimeCounterView.TimerCallbacks, Valu
 
     private var animator: ValueAnimator? = null
     private var timestampReference: DatabaseReference? = null
-
-    companion object {
-        private var timestampMillis: Long? = null
-    }
+    private lateinit var triviaVM: TriviaViewModel
+    var lastState: RideState = RideState(-1, -1, -1, 0)
 
     override fun displayToolBar() = false
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        triviaVM = ViewModelProviders.of(requireActivity(), TriviaViewModelFactory()).get(TriviaViewModel::class.java)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
@@ -42,17 +52,25 @@ class PendingRideFragment : BaseFragment(), TimeCounterView.TimerCallbacks, Valu
         timestampReference = FirebaseDatabase.getInstance().getReference("nextTaxi/timestamp")
         timestampReference?.addValueEventListener(this)
 
-        timestampMillis?.let {
-            startTimer(it)
-        }
+        triviaVM.rideData.observe(this, Observer {
+            handleState(it)
+        })
 
         val disposable = MainActivity.userScore.subscribe({
             userScore.text = it.toString()
         },{
-
+            EasyLog.e("userScore error: $it")
         })
 
         compositeDisposable.add(disposable)
+    }
+
+    private fun handleState(state: RideState) {
+        state.changed(lastState, { startRideTime }, action = {
+            startTimer(it)
+        })
+
+        lastState = state
     }
 
     private fun startTimer(millis: Long) {
@@ -69,8 +87,6 @@ class PendingRideFragment : BaseFragment(), TimeCounterView.TimerCallbacks, Valu
         }
         pendingLottieRoute.imageAssetsFolder = "assets/";
         pendingLottieRoute.setAnimation("on_the_way.json")
-//        pendingLottieRoute.repeatCount = 0
-//        pendingLottieRoute.playAnimation()
 
         if (duration > 0) {
             animator = ValueAnimator.ofFloat(0f, 1f)
@@ -99,15 +115,15 @@ class PendingRideFragment : BaseFragment(), TimeCounterView.TimerCallbacks, Valu
     }
 
     private fun checkIfDone(time: Long): Boolean {
-
-        if (time <= 0) {
+        EasyLog.d("ifDone: $time, ${(time <= 0)}")
+        return if (time <= 0) {
             (activity as? IBottomNavigation)?.setRideLiveState(true)
             val navController = NavHostFragment.findNavController(this)
             navController.navigate(R.id.action_pendingRideFragment_to_liveRideFragment)
-            return true
+            true
         } else {
             (activity as? IBottomNavigation)?.setRideLiveState(false)
-            return false
+            false
         }
     }
 
@@ -124,17 +140,18 @@ class PendingRideFragment : BaseFragment(), TimeCounterView.TimerCallbacks, Valu
     }
 
     override fun onAnimationUpdate(animation: ValueAnimator?) {
-        EasyLog.d("TEST_ANIM Val: ${animation?.animatedValue} - View: $pendingLottieRoute")
+//        EasyLog.d("TEST_ANIM Val: ${animation?.animatedValue} - View: $pendingLottieRoute")
         pendingLottieRoute?.progress = animation?.animatedValue as Float
     }
 
     override fun onDataChange(dataSnapshot: DataSnapshot) {
         try {
             val timestamp = dataSnapshot.getValue(String::class.java)!!
-            timestampMillis = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(timestamp).time
-            startTimer(timestampMillis!!)
+            EasyLog.e("newTimestamp: $timestamp")
+            triviaVM.updateStartRideTime(SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(timestamp).time)
         } catch (e: Exception) {
             EasyLog.e(e)
+            triviaVM.updateStartRideTime(System.currentTimeMillis() + 10*1000)
         }
     }
 
