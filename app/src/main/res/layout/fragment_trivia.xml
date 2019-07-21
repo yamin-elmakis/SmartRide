@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.motion.widget.MotionLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:orientation="vertical"
         android:background="@color/grey_50"
         tools:background="@color/red"
+        android:id="@+id/triviaLayout"
+        app:layoutDescription="@xml/scene_trivia"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -58,10 +60,10 @@
             android:layout_marginEnd="@dimen/trivia_margin_2"
             android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/triviaQuestion"
             android:stateListAnimator="@animator/raise"
             android:clickable="true"
-            android:focusable="true"
-            app:layout_constraintTop_toBottomOf="@id/triviaQuestion">
+            android:focusable="true" >
 
         <ImageView
                 android:id="@+id/trivia_half_icon"
@@ -103,10 +105,10 @@
             android:background="@drawable/selector_trivia_helper"
             android:layout_marginEnd="@dimen/trivia_margin_1"
             app:layout_constraintEnd_toStartOf="@id/triviaHalf"
+            app:layout_constraintTop_toTopOf="@id/triviaHalf"
             android:stateListAnimator="@animator/raise"
             android:clickable="true"
-            android:focusable="true"
-            app:layout_constraintTop_toTopOf="@id/triviaHalf" >
+            android:focusable="true" >
 
         <ImageView
                 android:id="@+id/trivia_plus_icon"
@@ -302,4 +304,4 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.motion.widget.MotionLayout>

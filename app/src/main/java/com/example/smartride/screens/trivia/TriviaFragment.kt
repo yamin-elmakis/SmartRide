@@ -108,12 +108,16 @@ class TriviaFragment : BaseFragment() {
         bindAnswer(triviaQuestionContainer4, triviaQuestion4, triviaIcon4, state.question.answers[3])
 
         state.question.changed(lastState.question, { userAnswered }, action = {
+            EasyLog.e("userAnswered: $it")
             if (it) {
+                triviaLayout.transitionToState(R.id.trivia_answered)
                 triviaQuestionContainer1.isEnabled = false
                 triviaQuestionContainer2.isEnabled = false
                 triviaQuestionContainer3.isEnabled = false
                 triviaQuestionContainer4.isEnabled = false
                 triviaLottieTimer.cancelAnimation()
+            } else {
+                triviaLayout.transitionToState(R.id.trivia_start)
             }
         })
         lastState = state
