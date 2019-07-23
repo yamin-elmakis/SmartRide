@@ -1,10 +1,10 @@
-<androidx.constraintlayout.motion.widget.MotionLayout
+<androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/pendingRideLayout"
-        app:layoutDescription="@xml/scene_home"
+
         android:background="@color/grey_50">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -132,54 +132,85 @@
             android:textColor="@color/blue_grey_100"
             android:text="YOUR DRIVER IS ON THE WAY!"/>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.Placeholder
+            android:id="@+id/pending_bottom_placeholder"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
             android:id="@+id/pendingExplainContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clickable="true"
-            android:focusable="true"
-            android:background="@color/colorAccent80"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layoutDescription="@xml/scene_home">
 
-        <LinearLayout
-                android:id="@+id/pendingTextContainer"
+        <View
+                android:id="@+id/pendingExplanationBack"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:background="@color/_white"
-                android:padding="12dp"
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        <View
+                android:id="@+id/pendingExplanationInfoBack"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/pendingExplanationPlaceholder"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="@color/_white"/>
+
+        <androidx.constraintlayout.widget.Placeholder
+                android:id="@+id/pendingExplanationPlaceholder"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/pendingExplanationInfo" />
+
+        <ImageView
+                android:id="@+id/pendingExplanationInfo"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:tint="@color/colorAccent"
+                android:layout_marginBottom="24dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" >
+                app:layout_constraintBottom_toTopOf="@+id/pending_explanation_info_title"
+                android:src="@drawable/ic_info"/>
 
-            <ImageView
-                    android:id="@+id/pendingExplanationInfo"
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
-                    android:tint="@color/colorAccent"
-                    android:src="@drawable/ic_info"/>
+        <TextView
+                android:id="@+id/pending_explanation_info_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="24dp"
+                android:layout_marginStart="@dimen/trivia_margin_2"
+                android:layout_marginEnd="@dimen/trivia_margin_2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textColor="@color/colorAccent"
+                app:layout_constraintBottom_toTopOf="@+id/pending_explanation_info_text"
+                android:text="Q-Rides is a free game where you can earn money"/>
 
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="24dp"
-                    android:textColor="@color/colorAccent"
-                    android:text="Q-Rides is a free game where you can earn money"/>
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:layout_marginTop="20dp"
-                    android:textColor="@color/colorAccent"
-                    android:text="Thank you for riding with us!
-When your ride will start, a trivia game will begin. Answer correctly as much as you can, earn coins and ride for free now and in your next rides with us"/>
+        <TextView
+                android:id="@+id/pending_explanation_info_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginStart="@dimen/trivia_margin_2"
+                android:layout_marginEnd="@dimen/trivia_margin_2"
+                android:textColor="@color/colorAccent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:text="@string/thank_you_for_riding_with_us"/>
 
-        </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.constraintlayout.motion.widget.MotionLayout>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

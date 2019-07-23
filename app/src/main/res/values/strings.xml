@@ -6,4 +6,8 @@
     <string name="hint_phone">Enter your phone number</string>
     <string name="phone_submit">Login</string>
     <string name="enjoy">Enjoy your ride</string>
+    <string name="thank_you_for_riding_with_us">
+        Thank you for riding with us! When your ride will start, a trivia game will begin. Answer correctly as much as
+        you can, earn coins and ride for free now and in your next rides with us
+    </string>
 </resources>

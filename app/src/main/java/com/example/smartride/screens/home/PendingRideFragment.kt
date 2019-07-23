@@ -79,11 +79,11 @@ class PendingRideFragment : BaseFragment(), TimeCounterView.TimerCallbacks, Valu
         pendingTimer.setTime(millis)
         pendingStartInfo.setOnClickListener {
             EasyLog.e("open")
-            pendingRideLayout.transitionToState(R.id.explanation_open)
+            pendingExplainContainer.transitionToState(R.id.explanation_open)
         }
         pendingExplanationInfo.setOnClickListener {
             EasyLog.e("close")
-            pendingRideLayout.transitionToState(R.id.explanation_close)
+            pendingExplainContainer.transitionToState(R.id.explanation_close)
         }
         pendingLottieRoute.imageAssetsFolder = "assets/";
         pendingLottieRoute.setAnimation("on_the_way.json")

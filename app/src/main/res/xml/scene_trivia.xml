@@ -20,7 +20,7 @@
                     app:layout_constraintTop_toBottomOf="@id/triviaQuestion"
                     android:layout_marginEnd="@dimen/trivia_margin_2"
                     android:layout_marginTop="10dp"
-                    android:visibility="visible">
+                    android:alpha="1">
             </Constraint>
             <Constraint
                     android:id="@id/triviaPlus"
@@ -29,7 +29,7 @@
                     android:layout_marginEnd="@dimen/trivia_margin_1"
                     app:layout_constraintEnd_toStartOf="@id/triviaHalf"
                     app:layout_constraintTop_toTopOf="@id/triviaHalf"
-                    android:visibility="visible">
+                    android:alpha="1">
             </Constraint>
             <Constraint
                     android:id="@id/trivia_need_help"
@@ -39,7 +39,7 @@
                     app:layout_constraintTop_toTopOf="@id/triviaHalf"
                     app:layout_constraintBottom_toBottomOf="@id/triviaHalf"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:visibility="visible">
+                    android:alpha="1">
             </Constraint>
 
         </ConstraintSet>
@@ -53,8 +53,8 @@
                     android:layout_marginEnd="@dimen/trivia_margin_2"
                     android:layout_marginTop="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/triviaQuestion"
-                    android:visibility="gone">
+                    app:layout_constraintTop_toTopOf="@id/triviaQuestion"
+                    android:alpha="0">
             </Constraint>
             <Constraint
                     android:id="@id/triviaPlus"
@@ -63,7 +63,7 @@
                     android:layout_marginEnd="@dimen/trivia_margin_1"
                     app:layout_constraintEnd_toStartOf="@id/triviaHalf"
                     app:layout_constraintTop_toTopOf="@id/triviaHalf"
-                    android:visibility="gone">
+                    android:alpha="0">
             </Constraint>
             <Constraint
                     android:id="@id/trivia_need_help"
@@ -73,7 +73,7 @@
                     app:layout_constraintTop_toTopOf="@id/triviaHalf"
                     app:layout_constraintBottom_toBottomOf="@id/triviaHalf"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:visibility="gone">
+                    android:alpha="0">
             </Constraint>
 
 
